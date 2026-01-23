@@ -1,37 +1,95 @@
-import { Card, CardContent, CardActions, Typography, Button } from "@mui/material";
+import { Card, CardContent, CardActionArea, Typography, CardMedia, Box } from "@mui/material";
+import { Link as RouterLink } from "react-router-dom";
 
 type AppCardProps = {
   title: string;
   description: string;
-  actionLabel?: string;
-  onActionClick?: () => void;
+  image?: string;
+  href:string;
 };
 
 export default function AppCard({
   title,
   description,
-  actionLabel = "Read More",
-  onActionClick,
+  image,
+  href,
 }: AppCardProps) {
   return (
-    <Card elevation={3}>
-      <CardContent>
-        <Typography variant="h6" gutterBottom>
-          {title}
-        </Typography>
+    <Card 
+      elevation={3}
+      sx={{
+        height: '100%',
+        display: 'flex', 
+        flexDirection: 'column', 
+      }}
+    >
 
-        <Typography variant="body2" color="text.secondary">
-          {description}
-        </Typography>
-      </CardContent>
+        <CardActionArea
+            component={RouterLink}
+            to={href}
+            sx={{
+                height: "100%",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "stretch",
+                justifyContent:"flex-start",
+                // removing the grey effect
+                "& .MuiCardActionArea-focusHighlight": {
+                    display: "none",
+                },
+                // image scaling
+                "&:hover .MuiCardMedia-root": {
+                    transform: "scale(1.15)",
+                  },
+            }}
+        >
+      
+        <Box sx={{ overflow: "hidden", width: "100%" }}>
+            {image && (
+            <CardMedia
+                component="img"
+                height="200"
+                image={image}
+                alt={title}
+                loading="lazy"
+                sx={{
+                  transition: "transform 0.4s ease-in-out",
+                }}
+            />
+            )}
+        </Box>
 
-      {onActionClick && (
-        <CardActions>
-          <Button size="small" onClick={onActionClick}>
-            {actionLabel}
-          </Button>
-        </CardActions>
-      )}
+        <CardContent sx={{ flexGrow: 1 }}>
+            <Typography 
+            variant="h6" 
+            gutterBottom
+            sx={{
+                // Title Clamping
+                display: '-webkit-box',
+                overflow: 'hidden',
+                WebkitBoxOrient: 'vertical',
+                WebkitLineClamp: 2,
+            }}
+            >
+            {title}
+            </Typography>
+
+            <Typography 
+            variant="body2" 
+            color="text.secondary"
+            sx={{
+                // Description Clamping
+                display: '-webkit-box',
+                overflow: 'hidden',
+                WebkitBoxOrient: 'vertical',
+                WebkitLineClamp: 3,
+            }}
+            >
+            {description}
+            </Typography>
+        </CardContent>
+      </CardActionArea>
+      
     </Card>
   );
 }

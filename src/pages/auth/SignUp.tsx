@@ -3,29 +3,29 @@ import {
     TextField,
     Stack,
     Link,
-    Typography,
-    Divider,
     Box,
     InputAdornment,
   } from "@mui/material";
   import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
-  import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
-  import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
   import AuthFormWrapper from "./AuthFormWrapper";
-  
+  import { DescriptionText, DividerText } from "../../components/ui/Typography";
+  import { AuthEmailField } from "../../components/ui/TextField/Email";
+  import { AuthPasswordField } from "../../components/ui/TextField/Password";
+
   export default function SignUp() {
     return (
         <AuthFormWrapper title="Create your account">
           <Stack spacing={3}>
-            {/* Subtitle */}
-            <Typography variant="body2" color="text.secondary">
+            
+            <DescriptionText>
               Join us and start sharing your thoughts.
-            </Typography>
-  
+            </DescriptionText>
+
+            {/* NEED */}
             {/* Inputs */}
             <Stack spacing={2}>
               <TextField
-                label="Full Name"
+                label="Username"
                 fullWidth
                 slotProps={{
                   input: {
@@ -38,36 +38,11 @@ import {
                 }}
               />
   
-              <TextField
-                label="Email Address"
-                fullWidth
-                slotProps={{
-                  input: {
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <EmailOutlinedIcon />
-                      </InputAdornment>
-                    ),
-                  },
-                }}
-              />
-  
-              <TextField
-                label="Password"
-                type="password"
-                fullWidth
-                slotProps={{
-                  input: {
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <LockOutlinedIcon />
-                      </InputAdornment>
-                    ),
-                  },
-                }}
-              />
+                <AuthEmailField/>
+                <AuthPasswordField/>
             </Stack>
-  
+                
+                {/* need */}
             {/* Primary action */}
             <Button
               variant="contained"
@@ -77,18 +52,14 @@ import {
               Create Account
             </Button>
   
-            {/* Divider */}
-            <Divider>
-              <Typography variant="caption" color="text.secondary">
-                or
-              </Typography>
-            </Divider>
+            <DividerText>or</DividerText>
   
             {/* Secondary action */}
             <Box sx={{ textAlign: "center" }}>
-              <Typography variant="body2" color="text.secondary">
+              <DescriptionText>
                 Already have an account?
-              </Typography>
+              </DescriptionText>
+              {/* MUI LINK tag is normal <a> tag, so must wrap it inside react router dom */}
               <Link href="/signin" underline="hover">
                 Sign in instead
               </Link>

@@ -39,6 +39,7 @@ const AppThemeProvider = ({ children }: AppThemeProviderProps) => {
     [mode]
   );
 
+  // NEWER VERSIONS ALSO USE COLOR SCHEME, instead of creating complete theme object, as mode changes
   const theme = useMemo(() => createAppTheme(mode), [mode]);
 
   return (

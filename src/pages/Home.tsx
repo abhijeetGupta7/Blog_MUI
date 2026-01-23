@@ -1,62 +1,58 @@
-import { Grid } from "@mui/material";
+import { Box, Button, Grid, Typography } from "@mui/material";
 import AppCard from "../components/AppCard";
-  
-  export default function Home() {
+import BlogCarousel from "../components/BlogCarousel";
+import { BLOG_POSTS } from "../data/mockData";
+import { Link as RouterLink } from "react-router-dom";
+import { DescriptionText } from "../components/ui/Typography";
 
-    const posts = [
-        {
-          id: 1,
-          title: "Understanding React Router v6",
-          description:
-            "Learn how layout routes and Outlet help you build scalable React apps.",
-        },
-        {
-          id: 2,
-          title: "Dark Mode in MUI",
-          description:
-            "How to implement a persisted dark mode with system preference fallback.",
-        },
-        {
-          id: 3,
-          title: "Reusable Components in React",
-          description:
-            "Why building reusable UI components saves time and reduces bugs.",
-        },
-        {
-            id: 1,
-            title: "Understanding React Router v6",
-            description:
-              "Learn how layout routes and Outlet help you build scalable React apps.",
-          },
-          {
-            id: 2,
-            title: "Dark Mode in MUI",
-            description:
-              "How to implement a persisted dark mode with system preference fallback.",
-          },
-          {
-            id: 3,
-            title: "Reusable Components in React",
-            description:
-              "Why building reusable UI components saves time and reduces bugs.",
-          },
-      ];
+export default function Home() {
+  return (
+    <>
+      <BlogCarousel />
 
-    return (
-        <Grid container spacing={3}>
-        {posts.map((post) => (
-          <Grid
-            key={post.id}
-            size={{ xs: 12, sm: 6, md: 4 }}
+      <Box sx={{ mt: 8 }}>
+        <Box
+          sx={{
+            mb: 4,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          <Box>
+            <Typography variant="h3" fontWeight={800}>
+              Recent Blogs
+            </Typography>
+
+              <DescriptionText>
+                Latest thoughts from the community
+              </DescriptionText>
+          </Box>
+
+          <Button
+            component={RouterLink}
+            to="/blogs"
+            variant="text"
+            sx={{ fontWeight: 600 }}
           >
-            <AppCard
-              title={post.title}
-              description={post.description}
-            />
-          </Grid>
-        ))}
-      </Grid>
-      
-    );
-  }
-  
+            View all
+          </Button>
+        </Box>
+
+        {/* CONTENT GRID */}
+        <Grid container spacing={4}>
+          {BLOG_POSTS.map((post) => (
+            <Grid key={post.id} size={{ xs: 12, sm: 6, md: 4 }}>
+              <AppCard
+                title={post.title}
+                description={post.description}
+                image={post.image}
+                href={`/blog/${post.id}`}
+              />
+            </Grid>
+          ))}
+        </Grid>
+      </Box>
+    </>
+  );
+}

@@ -11,6 +11,7 @@ export const AppThemeContext = createContext<AppThemeContextType | undefined>(un
 export const useAppTheme = () => {
   const context = useContext(AppThemeContext);
 
+  // Early failing is better, error catched
   if (!context) {
     throw new Error(
       "useAppTheme must be used within an AppThemeProvider"

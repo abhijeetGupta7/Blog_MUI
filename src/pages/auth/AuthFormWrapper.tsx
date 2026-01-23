@@ -10,7 +10,7 @@ export default function AuthFormWrapper({
   children,
 }: AuthFormWrapperProps) {
   return (
-    <Paper elevation={3} sx={{ p: 4 }}>
+    <Paper elevation={2} sx={{ p: 4 }}>
       <Typography variant="h5" gutterBottom>
         {title}
       </Typography>
