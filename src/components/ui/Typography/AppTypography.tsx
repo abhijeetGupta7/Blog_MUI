@@ -1,4 +1,4 @@
-import MuiTypography, { type TypographyProps } from "@mui/material/Typography";
+import Typography, { type TypographyProps } from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
 import type { AppTypographyIntent } from "./types";
 import { typographyStyles } from "./styles";
@@ -10,7 +10,7 @@ interface AppTypographyProps extends TypographyProps {
   intent?: AppTypographyIntent;
 }
 
-export const AppTypography = styled(MuiTypography, {
+export const AppTypography = styled(Typography, {
     shouldForwardProp: prop => prop !== "intent",
   })<AppTypographyProps>(({ theme, intent = "bodyPrimary" }) => ({
     fontFamily: theme.typography.fontFamily,

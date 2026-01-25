@@ -4,7 +4,6 @@ import Paper from "@mui/material/Paper";
 import { AppTypography } from "../components/ui/Typography/AppTypography";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
 import Avatar from "@mui/material/Avatar";
 import Divider from "@mui/material/Divider";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -13,6 +12,7 @@ import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import PhotoCameraOutlinedIcon from "@mui/icons-material/PhotoCameraOutlined";
 import { MOCK_USER } from "../data/mockUser";
+import { AppButton } from "../components/ui/Button/AppButton";
 
 export default function Profile() {
   const [username, setUsername] = useState(MOCK_USER.username);
@@ -57,14 +57,15 @@ export default function Profile() {
                   sx={{ width: 96, height: 96 }}
                 />
 
-                <Button
-                  variant="outlined"
+                <AppButton
+                  intent="secondary"
                   component="label"
                   startIcon={<PhotoCameraOutlinedIcon />}
                 >
                   Change photo
                   <input hidden type="file" accept="image/*" onChange={handleImageChange} />
-                </Button>
+                </AppButton>
+
               </Stack>
 
               {/* Username */}
@@ -108,10 +109,12 @@ export default function Profile() {
 
               {/* Actions */}
               <Stack direction="row" spacing={2} justifyContent="flex-end">
-                <Button variant="outlined">Cancel</Button>
-                <Button type="submit" variant="contained">
+                <AppButton intent="secondary">Cancel</AppButton>
+                
+                <AppButton type="submit" intent="primary">
                   Save changes
-                </Button>
+                </AppButton>
+                
               </Stack>
             </Stack>
           </Box>

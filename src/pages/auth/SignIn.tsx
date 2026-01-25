@@ -1,5 +1,4 @@
 import React from "react";
-import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
@@ -10,6 +9,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import { AppTypography } from "../../components/ui/Typography/AppTypography";
+import { AppButton } from "../../components/ui/Button/AppButton";
 
   function SignIn() {
     return (
@@ -49,10 +49,7 @@ import { AppTypography } from "../../components/ui/Typography/AppTypography";
     />
           </Stack>
 
-        {/* NEED */}
-          <Button variant="contained" size="large" fullWidth>
-            Sign In
-          </Button>         
+          <AppButton intent="primary"> Sign In </AppButton>       
 
           <Divider>
       <AppTypography intent="caption">or</AppTypography>

@@ -1,13 +1,12 @@
 import { useParams, useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import { AppTypography } from "./ui/Typography/AppTypography";
-import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { BLOG_POSTS } from "../data/mockData";
-
+import { AppButton } from "./ui/Button/AppButton";
 
 export default function BlogDetail() {
   const { id } = useParams(); 
@@ -18,25 +17,27 @@ export default function BlogDetail() {
   if (!post) {
     return (
       // SEPARATED PAGE NOT FOUND AND POST NOT FOUND
-      <Container sx={{ py: 10, textAlign: "center" }}>
+      <Container sx={{ py: 10, textAlign: "center"}}>
         <AppTypography intent="headingMedium">Post not found</AppTypography>
-        <Button onClick={() => navigate("/")} sx={{ mt: 2 }}>
+        <AppButton intent="primary" onClick={() => navigate("/")} sx={{mt:2}}>
           Go Home
-        </Button>
+        </AppButton> 
       </Container>
     );
   }
 
   return (
     <Container maxWidth="md" sx={{ py: 4 }}>
+  
       {/* Back Button */}
-      <Button 
+      <AppButton 
+        intent="text"
         startIcon={<ArrowBackIcon />} 
         onClick={() => navigate(-1)}
-        sx={{ mb: 4 }}
+        sx={{ mb: 4 }}  // whereever in visual compoenent like button typography etc such sx are there it should not be used, bcz button has its style that's enough, these margin, spacing stuffs should be handled by layout components 
       >
         Back
-      </Button>
+      </AppButton>
 
       {/* my blog POST */}
       {post.image && (

@@ -1,5 +1,4 @@
 import React from "react";
-import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import Link from "@mui/material/Link";
@@ -11,7 +10,7 @@ import Box from "@mui/material/Box";
 import InputAdornment from "@mui/material/InputAdornment";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
-
+import { AppButton } from "../../components/ui/Button/AppButton";
 
   function SignUp() {
     return (
@@ -67,16 +66,8 @@ import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
                    />
             </Stack>
                 
-                {/* need */}
-            {/* Primary action */}
-            <Button
-              variant="contained"
-              size="large"
-              fullWidth
-            >
-              Create Account
-            </Button>
-  
+            <AppButton intent="primary">Create Account</AppButton>
+            
             <Divider>
       <AppTypography intent="caption" sx={{px:1}}>or</AppTypography>
     </Divider>

@@ -3,7 +3,6 @@ import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
 import { AppTypography } from "../components/ui/Typography/AppTypography";
 import Autocomplete from "@mui/material/Autocomplete";
 import Chip from "@mui/material/Chip";
@@ -12,6 +11,7 @@ import Alert from "@mui/material/Alert";
 import Divider from "@mui/material/Divider";
 import PhotoCameraOutlinedIcon from "@mui/icons-material/PhotoCameraOutlined";
 import { useNavigate } from "react-router-dom";
+import { AppButton } from "../components/ui/Button/AppButton";
 
 const TAG_OPTIONS = [
   "React",
@@ -141,19 +141,14 @@ export default function CreatePost() {
                     />
                   )}
 
-                  <Button
-                    variant="outlined"
+                  <AppButton
+                    intent="secondary"
                     component="label"
                     startIcon={<PhotoCameraOutlinedIcon />}
                   >
                     Upload image
-                    <input
-                      hidden
-                      type="file"
-                      accept="image/*"
-                      onChange={handleImageChange}
-                    />
-                  </Button>
+                    <input hidden type="file" accept="image/*" onChange={handleImageChange} />
+                  </AppButton>
                 </Box>
               </Stack>
 
@@ -202,12 +197,14 @@ export default function CreatePost() {
 
               {/* Actions */}
               <Stack direction="row" spacing={2} justifyContent="flex-end">
-                <Button variant="text" onClick={resetForm}>
+            
+                <AppButton intent="text" onClick={resetForm}>
                   Reset
-                </Button>
-                <Button type="submit" variant="contained">
+                </AppButton>
+                
+                <AppButton type="submit">
                   Publish
-                </Button>
+                </AppButton>
               </Stack>
             </Stack>
           </Box>
