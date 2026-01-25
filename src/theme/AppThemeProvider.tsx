@@ -1,4 +1,6 @@
-import { CssBaseline, ThemeProvider, useMediaQuery } from "@mui/material";
+import CssBaseline from "@mui/material/CssBaseline";
+import { ThemeProvider } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import { useMemo, useState } from "react";
 import { createAppTheme } from "./theme";
 import { AppThemeContext } from "./AppThemeContext";

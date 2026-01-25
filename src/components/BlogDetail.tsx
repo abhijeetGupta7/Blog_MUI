@@ -1,5 +1,10 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { Box, Typography, Button, Container, Chip, Stack } from "@mui/material";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
+import Chip from "@mui/material/Chip";
+import Stack from "@mui/material/Stack";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { BLOG_POSTS } from "../data/mockData";
 
@@ -39,6 +44,7 @@ export default function BlogDetail() {
           component="img"
           src={post.image}
           alt={post.title}
+          loading="eager"
           sx={{
             width: "100%",
             height: "400px",

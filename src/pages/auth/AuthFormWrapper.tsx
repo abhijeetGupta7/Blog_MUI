@@ -1,11 +1,14 @@
-import { Box, Paper, Typography } from "@mui/material";
+import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
+import Typography from "@mui/material/Typography";
+import React from "react";
 
 type AuthFormWrapperProps = {
   title: string;
   children: React.ReactNode;
 };
 
-export default function AuthFormWrapper({
+function AuthFormWrapper({
   title,
   children,
 }: AuthFormWrapperProps) {
@@ -20,3 +23,5 @@ export default function AuthFormWrapper({
     </Paper>
   );
 }
+
+export default React.memo(AuthFormWrapper);

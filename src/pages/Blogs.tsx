@@ -1,20 +1,17 @@
 import { useMemo, useState } from "react";
-import {
-  Box,
-  Grid,
-  Typography,
-  TextField,
-  InputAdornment,
-  Select,
-  MenuItem,
-  Chip,
-  Stack,
-  Divider,
-} from "@mui/material";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import TextField from "@mui/material/TextField";
+import InputAdornment from "@mui/material/InputAdornment";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import Chip from "@mui/material/Chip";
+import Stack from "@mui/material/Stack";
+import Divider from "@mui/material/Divider";
 import SearchIcon from "@mui/icons-material/Search";
 import AppCard from "../components/AppCard";
 import { BLOG_POSTS } from "../data/mockData";
-import { DescriptionText } from "../components/ui/Typography";
 
 /* -------------------------------------------------------------------------- */
 /* CONFIG */
@@ -58,6 +55,21 @@ export default function Blogs() {
     return posts;
   }, [search, selectedTag, sort]);
 
+  const postCards = useMemo(
+    () =>
+      filteredPosts.map((post) => (
+        <Grid key={post.id} size={{ xs: 12, sm: 6, md: 4 }}>
+          <AppCard
+            title={post.title}
+            description={post.description}
+            image={post.image}
+            href={`/blog/${post.id}`}
+          />
+        </Grid>
+      )),
+    [filteredPosts]
+  );
+
   /* ---------------------------------------------------------------------- */
   /* UI */
   /* ---------------------------------------------------------------------- */
@@ -69,9 +81,9 @@ export default function Blogs() {
         <Typography variant="h3" fontWeight={800}>
           All Blogs
         </Typography>
-        <DescriptionText>
             Browse, search, and explore all published articles
-        </DescriptionText>
+            <Typography color="text.secondary" variant="body2">  </Typography>
+
       </Box>
 
       {/* FILTER BAR */}
@@ -128,18 +140,7 @@ export default function Blogs() {
       <Divider sx={{ mb: 4 }} />
 
       {/* BLOG GRID */}
-      <Grid container spacing={4}>
-        {filteredPosts.map((post) => (
-          <Grid key={post.id} size={{ xs: 12, sm: 6, md: 4 }}>
-            <AppCard
-              title={post.title}
-              description={post.description}
-              image={post.image}
-              href={`/blog/${post.id}`}
-            />
-          </Grid>
-        ))}
-      </Grid>
+      <Grid container spacing={4}>{postCards}</Grid>
 
       {/* EMPTY STATE */}
       {filteredPosts.length === 0 && (

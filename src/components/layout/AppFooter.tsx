@@ -1,6 +1,10 @@
-import { Box, Container, Typography, Link } from "@mui/material";
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
+import Link from "@mui/material/Link";
+import React from "react";
 
-export default function AppFooter() {
+function AppFooter() {
   return (
     <Box
       component="footer"
@@ -57,3 +61,5 @@ export default function AppFooter() {
     </Box>
   );
 }
+
+export default React.memo(AppFooter);

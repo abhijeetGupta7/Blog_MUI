@@ -1,34 +1,69 @@
-import {
-    Button,
-    Stack,
-    Link,
-    Box, 
-  } from "@mui/material";
-  import AuthFormWrapper from "./AuthFormWrapper";
-  import { DescriptionText, DividerText } from "../../components/ui/Typography";
-import { AuthEmailField } from "../../components/ui/TextField/Email";
-import { AuthPasswordField } from "../../components/ui/TextField/Password";
+import React from "react";
+import Button from "@mui/material/Button";
+import Stack from "@mui/material/Stack";
+import Link from "@mui/material/Link";
+import Box from "@mui/material/Box";
+import AuthFormWrapper from "./AuthFormWrapper";
+import { Divider, Typography } from "@mui/material";
+import TextField from "@mui/material/TextField";
+import InputAdornment from "@mui/material/InputAdornment";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 
-  export default function SignIn() {
+  function SignIn() {
     return (
       <AuthFormWrapper title="Welcome back">
         <Stack spacing={3}>
-          <DescriptionText> Sign in to continue to your account. </DescriptionText>
-  
+          <Typography color="text.secondary" variant="body2"> Sign in to continue to your account. </Typography>
+
           <Stack spacing={2}>
-            <AuthEmailField/>
-            <AuthPasswordField/>
+          <TextField
+      label="Email address"
+      type="email"
+      fullWidth
+      slotProps={{
+        input: {
+          startAdornment: (
+            <InputAdornment position="start">
+              <EmailOutlinedIcon />
+            </InputAdornment>
+          ),
+        },
+      }}
+    />
+             <TextField
+      label="Password"
+      type="password"
+      fullWidth
+      slotProps={{
+        input: {
+          startAdornment: (
+            <InputAdornment position="start">
+              <LockOutlinedIcon />
+            </InputAdornment>
+          ),
+        },
+      }}
+    />
           </Stack>
 
         {/* NEED */}
           <Button variant="contained" size="large" fullWidth>
             Sign In
           </Button>         
-  
-          <DividerText>or</DividerText>
+
+          <Divider>
+      <Typography
+        variant="caption"
+        color="text.secondary"
+        sx={{ px: 1 }} 
+      >
+        or
+      </Typography>
+    </Divider>
   
           <Box sx={{ textAlign: "center" }}>
-            <DescriptionText> Don’t have an account? </DescriptionText>
+          <Typography color="text.secondary" variant="body2"> Don’t have an account? </Typography>
             {/* need */}
             <Link href="/signup" underline="hover">
               Create one
@@ -39,3 +74,4 @@ import { AuthPasswordField } from "../../components/ui/TextField/Password";
     );
   }
   
+export default React.memo(SignIn);

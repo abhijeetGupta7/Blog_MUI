@@ -1,27 +1,25 @@
-import {
-    Button,
-    TextField,
-    Stack,
-    Link,
-    Box,
-    InputAdornment,
-  } from "@mui/material";
+import React from "react";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Stack from "@mui/material/Stack";
+import Link from "@mui/material/Link";
+import Box from "@mui/material/Box";
   import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
   import AuthFormWrapper from "./AuthFormWrapper";
-  import { DescriptionText, DividerText } from "../../components/ui/Typography";
-  import { AuthEmailField } from "../../components/ui/TextField/Email";
-  import { AuthPasswordField } from "../../components/ui/TextField/Password";
+import { Typography, Divider } from "@mui/material";
+import InputAdornment from "@mui/material/InputAdornment";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 
-  export default function SignUp() {
+
+  function SignUp() {
     return (
         <AuthFormWrapper title="Create your account">
           <Stack spacing={3}>
             
-            <DescriptionText>
-              Join us and start sharing your thoughts.
-            </DescriptionText>
+          <Typography color="text.secondary" variant="body2"> Join us and start sharing your thoughts. </Typography>
 
-            {/* NEED */}
+              {/* NEED */}
             {/* Inputs */}
             <Stack spacing={2}>
               <TextField
@@ -38,8 +36,34 @@ import {
                 }}
               />
   
-                <AuthEmailField/>
-                <AuthPasswordField/>
+  <TextField
+      label="Email address"
+      type="email"
+      fullWidth
+      slotProps={{
+        input: {
+          startAdornment: (
+            <InputAdornment position="start">
+              <EmailOutlinedIcon />
+            </InputAdornment>
+          ),
+        },
+      }}
+    />
+                <TextField
+                     label="Password"
+                     type="password"
+                     fullWidth
+                     slotProps={{
+                       input: {
+                         startAdornment: (
+                           <InputAdornment position="start">
+                             <LockOutlinedIcon />
+                           </InputAdornment>
+                         ),
+                       },
+                     }}
+                   />
             </Stack>
                 
                 {/* need */}
@@ -52,14 +76,20 @@ import {
               Create Account
             </Button>
   
-            <DividerText>or</DividerText>
+            <Divider>
+      <Typography
+        variant="caption"
+        color="text.secondary"
+        sx={{ px: 1 }} 
+      >
+        or
+      </Typography>
+    </Divider>
   
             {/* Secondary action */}
             <Box sx={{ textAlign: "center" }}>
-              <DescriptionText>
-                Already have an account?
-              </DescriptionText>
-              {/* MUI LINK tag is normal <a> tag, so must wrap it inside react router dom */}
+            <Typography color="text.secondary" variant="body2"> Already have an account? </Typography>
+               {/* MUI LINK tag is normal <a> tag, so must wrap it inside react router dom */}
               <Link href="/signin" underline="hover">
                 Sign in instead
               </Link>
@@ -68,4 +98,5 @@ import {
         </AuthFormWrapper>
     );
   }
+    export default React.memo(SignUp);
   

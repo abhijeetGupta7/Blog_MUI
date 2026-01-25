@@ -1,14 +1,13 @@
 import { useRef, useEffect, useState } from "react";
-import {
-  Box,
-  Typography,
-  Card,
-  CardActionArea,
-  CardContent,
-  IconButton,
-  Chip,
-  alpha,
-} from "@mui/material";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Card from "@mui/material/Card";
+import CardActionArea from "@mui/material/CardActionArea";
+import CardContent from "@mui/material/CardContent";
+import IconButton from "@mui/material/IconButton";
+import Chip from "@mui/material/Chip";
+import { alpha } from "@mui/material/styles";
+import React from "react";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { BLOG_POSTS } from "../data/mockData";
@@ -139,6 +138,8 @@ function HeroCard({ item }: { item: typeof BLOG_POSTS[0] }) {
   );
 }
 
+const MemoHeroCard = React.memo(HeroCard);
+
 /* -------------------------------------------------------------------------- */
 /* HERO CAROUSEL */
 /* -------------------------------------------------------------------------- */
@@ -198,7 +199,7 @@ export default function HeroCarousel() {
         }}
       >
         {BLOG_POSTS.map((item) => (
-          <HeroCard key={item.id} item={item} />
+          <MemoHeroCard key={item.id} item={item} />
         ))}
       </Box>
     </Box>

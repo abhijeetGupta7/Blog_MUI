@@ -1,11 +1,10 @@
 import { useRef, useEffect } from "react";
-import {
-  Box,
-  Card,
-  CardActionArea,
-  Typography,
-  Chip,
-} from "@mui/material";
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import CardActionArea from "@mui/material/CardActionArea";
+import Typography from "@mui/material/Typography";
+import Chip from "@mui/material/Chip";
+import React from "react";
 
 type CarouselItem = {
   id: number;
@@ -18,7 +17,7 @@ type Props = {
   items: CarouselItem[];
 };
 
-export default function MaterialCarousel({ items }: Props) {
+function MaterialCarousel({ items }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -128,6 +127,7 @@ export default function MaterialCarousel({ items }: Props) {
                   data-carousel-image
                   src={item.image}
                   alt={item.title}
+                  loading="lazy"
                   sx={{
                     width: "110%",
                     height: "100%",
@@ -181,3 +181,6 @@ export default function MaterialCarousel({ items }: Props) {
     </Box>
   );
 }
+
+const MemoMaterialCarousel = React.memo(MaterialCarousel);
+export default MemoMaterialCarousel;

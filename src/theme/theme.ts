@@ -1,4 +1,4 @@
-import { createTheme } from "@mui/material";
+import { createTheme } from "@mui/material/styles";
 
 export function createAppTheme(mode: "light" | "dark") {
   return createTheme({

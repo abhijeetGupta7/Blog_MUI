@@ -1,21 +1,18 @@
 import { useState } from "react";
-import {
-  Box,
-  Paper,
-  Typography,
-  Stack,
-  TextField,
-  Button,
-  Avatar,
-  Divider,
-  FormControlLabel,
-  Switch,
-  Snackbar,
-  Alert,
-} from "@mui/material";
+import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
+import Typography from "@mui/material/Typography";
+import Stack from "@mui/material/Stack";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import Avatar from "@mui/material/Avatar";
+import Divider from "@mui/material/Divider";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Switch from "@mui/material/Switch";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 import PhotoCameraOutlinedIcon from "@mui/icons-material/PhotoCameraOutlined";
 import { MOCK_USER } from "../data/mockUser";
-import { DescriptionText } from "../components/ui/Typography";
 
 export default function Profile() {
   const [username, setUsername] = useState(MOCK_USER.username);
@@ -49,9 +46,8 @@ export default function Profile() {
           <Typography variant="h5" fontWeight={600}>
             Profile
           </Typography>
-          <DescriptionText>
-            Manage your account information
-          </DescriptionText>
+          <Typography color="text.secondary" variant="body2">    Manage your account information
+ </Typography>
 
           <Divider sx={{ my: 3 }} />
 

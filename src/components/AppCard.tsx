@@ -1,4 +1,10 @@
-import { Card, CardContent, CardActionArea, Typography, CardMedia, Box } from "@mui/material";
+import React from "react";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardActionArea from "@mui/material/CardActionArea";
+import Typography from "@mui/material/Typography";
+import CardMedia from "@mui/material/CardMedia";
+import Box from "@mui/material/Box";
 import { Link as RouterLink } from "react-router-dom";
 
 type AppCardProps = {
@@ -8,7 +14,7 @@ type AppCardProps = {
   href:string;
 };
 
-export default function AppCard({
+function AppCard({
   title,
   description,
   image,
@@ -52,9 +58,6 @@ export default function AppCard({
                 image={image}
                 alt={title}
                 loading="lazy"
-                sx={{
-                  transition: "transform 0.4s ease-in-out",
-                }}
             />
             )}
         </Box>
@@ -93,3 +96,5 @@ export default function AppCard({
     </Card>
   );
 }
+
+export default React.memo(AppCard);

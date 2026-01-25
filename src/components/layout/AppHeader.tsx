@@ -1,10 +1,15 @@
-import { AppBar, Toolbar, Typography, Button, IconButton } from "@mui/material";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
 import { Link as RouterLink } from "react-router-dom";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import { useAppTheme } from "../../theme/AppThemeContext";
+import React from "react";
 
-export default function AppHeader() {
+function AppHeader() {
   const { mode, toggleThemeMode } = useAppTheme();
 
   return (
@@ -31,3 +36,5 @@ export default function AppHeader() {
     </AppBar>
   );
 }
+
+export default React.memo(AppHeader);

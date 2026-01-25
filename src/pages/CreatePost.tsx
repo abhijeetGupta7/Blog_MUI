@@ -1,20 +1,17 @@
 import { useCallback, useMemo, useState } from "react";
-import {
-  Box,
-  Paper,
-  Stack,
-  TextField,
-  Button,
-  Typography,
-  Autocomplete,
-  Chip,
-  Snackbar,
-  Alert,
-  Divider,
-} from "@mui/material";
+import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
+import Stack from "@mui/material/Stack";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Autocomplete from "@mui/material/Autocomplete";
+import Chip from "@mui/material/Chip";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
+import Divider from "@mui/material/Divider";
 import PhotoCameraOutlinedIcon from "@mui/icons-material/PhotoCameraOutlined";
 import { useNavigate } from "react-router-dom";
-import { DescriptionText } from "../components/ui/Typography";
 
 const TAG_OPTIONS = [
   "React",
@@ -37,7 +34,6 @@ export default function CreatePost() {
 
   const tagOptions = useMemo(() => TAG_OPTIONS, []);
 
-  /* -------------------- Image Upload -------------------- */
   const handleImageChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const file = e.target.files?.[0];
@@ -50,7 +46,6 @@ export default function CreatePost() {
     []
   );
 
-  /* -------------------- Form Actions -------------------- */
   const resetForm = useCallback(() => {
     setTitle("");
     setDescription("");
@@ -88,7 +83,6 @@ export default function CreatePost() {
     [title, description, tags, imagePreview, navigate, resetForm]
   );
 
-  /* -------------------- UI -------------------- */
   return (
     <>
       <Box
@@ -112,9 +106,9 @@ export default function CreatePost() {
             Create New Post
           </Typography>
           
-          <DescriptionText>
-            Share your thoughts with the community
-          </DescriptionText>
+          <Typography color="text.secondary" variant="body2">             Share your thoughts with the community
+ </Typography>
+
 
           <Divider sx={{ my: 3 }} />
 
