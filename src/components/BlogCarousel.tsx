@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState } from "react";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
+import { AppTypography } from "./ui/Typography/AppTypography";
 import Card from "@mui/material/Card";
 import CardActionArea from "@mui/material/CardActionArea";
 import CardContent from "@mui/material/CardContent";
@@ -113,12 +113,12 @@ function HeroCard({ item }: { item: typeof BLOG_POSTS[0] }) {
             }}
           />
 
-          <Typography variant="h4" fontWeight={800} lineHeight={1.1} mb={1}>
+          <AppTypography intent="headingMedium" sx={{ lineHeight: 1.1, mb: 1 }}>
             {item.title}
-          </Typography>
+          </AppTypography>
 
-          <Typography
-            variant="body1"
+          <AppTypography
+            intent="bodyPrimary"
             sx={{
               color: "rgba(255,255,255,0.85)",
               display: "-webkit-box",
@@ -131,7 +131,7 @@ function HeroCard({ item }: { item: typeof BLOG_POSTS[0] }) {
             }}
           >
             {item.description}
-          </Typography>
+          </AppTypography>
         </CardContent>
       </CardActionArea>
     </Card>
@@ -165,13 +165,8 @@ export default function HeroCarousel() {
           alignItems: "center",
         }}
       >
-        <Typography variant="h3" fontWeight={800}>
-          Featured Blogs
-        </Typography>
-{/* 
-        <DescriptionText>
-          Latest thoughts from the community
-        </DescriptionText> */}
+        <AppTypography intent="headingLarge">Featured Blogs</AppTypography>
+
 
         <Box sx={{ display: { xs: "none", md: "flex" }, gap: 1 }}>
           <IconButton onClick={() => scroll("left")}>

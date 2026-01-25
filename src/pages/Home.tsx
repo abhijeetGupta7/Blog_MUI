@@ -2,7 +2,7 @@ import React, { useMemo, lazy } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
+import { AppTypography } from "../components/ui/Typography/AppTypography";
 import AppCard from "../components/AppCard";
 const BlogCarousel = lazy(() => import("../components/BlogCarousel"));
 import PageLoader from "../components/PageLoader";
@@ -34,11 +34,9 @@ export default function Home() {
       <Box>
         <Box>
           <Box>
-            <Typography variant="h3" fontWeight={800}>
-              Recent Blogs
-            </Typography>
+            <AppTypography intent="headingLarge">Recent Blogs</AppTypography>
 
-              <Typography color="text.secondary" variant="body2"> Latest thoughts from the community </Typography>              
+              <AppTypography intent="bodySecondary">Latest thoughts from the community</AppTypography>
           </Box>
 
           <Button

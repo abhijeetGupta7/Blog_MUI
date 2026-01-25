@@ -1,6 +1,6 @@
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
+import { AppTypography } from "../ui/Typography/AppTypography";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import { Link as RouterLink } from "react-router-dom";
@@ -15,14 +15,14 @@ function AppHeader() {
   return (
     <AppBar position="sticky" color="default" elevation={1}>
       <Toolbar>
-        <Typography
-          variant="h6"
+        <AppTypography
+          intent="headingSmall"
           component={RouterLink}
           to="/"
           sx={{ textDecoration: "none", color: "inherit", flexGrow: 1, fontWeight: 600 }}
         >
           MyBlog
-        </Typography>
+        </AppTypography>
 
         <Button component={RouterLink} to="/" color="inherit">Home</Button>
         <Button component={RouterLink} to="/create-post" color="inherit">Create</Button>

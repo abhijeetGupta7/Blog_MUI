@@ -6,7 +6,6 @@ import { typographyStyles } from "./styles";
 interface AppTypographyProps extends TypographyProps {
   /**
    * Semantic intent for typography.
-   * New intents should be added only when reused.
    */
   intent?: AppTypographyIntent;
 }

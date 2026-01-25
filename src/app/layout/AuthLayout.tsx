@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
+import { AppTypography } from "../../components/ui/Typography/AppTypography";
 import { Outlet } from "react-router-dom";
 
 export default function AuthLayout() {
@@ -21,12 +21,8 @@ export default function AuthLayout() {
           }}
         >
           <Box sx={{ textAlign: "center", px: 4 }}>
-            <Typography variant="h4" fontWeight={600} gutterBottom>
-              Welcome to MyBlog
-            </Typography>
-            <Typography variant="body1" sx={{ opacity: 0.9 }}>
-              Share your thoughts with the world.
-            </Typography>
+            <AppTypography intent="headingMedium" gutterBottom>Welcome to MyBlog</AppTypography>
+            <AppTypography intent="bodyPrimary">Share your thoughts with the world.</AppTypography>
           </Box>
         </Grid>
 

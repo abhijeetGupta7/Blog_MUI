@@ -4,7 +4,7 @@ import Stack from "@mui/material/Stack";
 import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
 import AuthFormWrapper from "./AuthFormWrapper";
-import { Divider, Typography } from "@mui/material";
+import Divider from "@mui/material/Divider";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -55,13 +55,7 @@ import { AppTypography } from "../../components/ui/Typography/AppTypography";
           </Button>         
 
           <Divider>
-      <Typography
-        variant="caption"
-        color="text.secondary"
-        sx={{ px: 1 }} 
-      >
-        or
-      </Typography>
+      <AppTypography intent="caption">or</AppTypography>
     </Divider>
   
           <Box sx={{ textAlign: "center" }}>

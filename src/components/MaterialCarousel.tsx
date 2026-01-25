@@ -2,7 +2,7 @@ import { useRef, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardActionArea from "@mui/material/CardActionArea";
-import Typography from "@mui/material/Typography";
+import { AppTypography } from "./ui/Typography/AppTypography";
 import Chip from "@mui/material/Chip";
 import React from "react";
 
@@ -73,9 +73,7 @@ function MaterialCarousel({ items }: Props) {
 
   return (
     <Box sx={{ py: 6 }}>
-      <Typography variant="h4" fontWeight="bold" sx={{ mb: 3 }}>
-        Featured Stories
-      </Typography>
+      <AppTypography intent="headingMedium" sx={{ mb: 3 }}>Featured Stories</AppTypography>
 
       <Box
         ref={containerRef}
@@ -166,13 +164,9 @@ function MaterialCarousel({ items }: Props) {
                     backdropFilter: "blur(6px)",
                   }}
                 />
-                <Typography
-                  variant="h5"
-                  fontWeight="bold"
-                  sx={{ lineHeight: 1.2 }}
-                >
+                <AppTypography intent="headingMedium" sx={{ lineHeight: 1.2 }}>
                   {item.title}
-                </Typography>
+                </AppTypography>
               </Box>
             </CardActionArea>
           </Card>

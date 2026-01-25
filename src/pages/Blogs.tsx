@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
+import { AppTypography } from "../components/ui/Typography/AppTypography";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import Select from "@mui/material/Select";
@@ -78,12 +78,8 @@ export default function Blogs() {
     <Box>
       {/* PAGE HEADER */}
       <Box sx={{ mb: 4 }}>
-        <Typography variant="h3" fontWeight={800}>
-          All Blogs
-        </Typography>
-            Browse, search, and explore all published articles
-            <Typography color="text.secondary" variant="body2">  </Typography>
-
+        <AppTypography intent="headingLarge">All Blogs</AppTypography>
+        <AppTypography intent="bodyPrimary">Browse, search, and explore all published articles</AppTypography>
       </Box>
 
       {/* FILTER BAR */}
@@ -144,12 +140,9 @@ export default function Blogs() {
 
       {/* EMPTY STATE */}
       {filteredPosts.length === 0 && (
-        <Typography
-          sx={{ mt: 6, textAlign: "center" }}
-          color="text.secondary"
-        >
-          No blogs found.
-        </Typography>
+        <Box sx={{ mt: 6, textAlign: "center" }}>
+          <AppTypography intent="bodySecondary">No blogs found.</AppTypography>
+        </Box>
       )}
     </Box>
   );

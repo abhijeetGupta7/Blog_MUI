@@ -2,7 +2,7 @@ import React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardActionArea from "@mui/material/CardActionArea";
-import Typography from "@mui/material/Typography";
+import { AppTypography } from "./ui/Typography/AppTypography";
 import CardMedia from "@mui/material/CardMedia";
 import Box from "@mui/material/Box";
 import { Link as RouterLink } from "react-router-dom";
@@ -63,33 +63,32 @@ function AppCard({
         </Box>
 
         <CardContent sx={{ flexGrow: 1 }}>
-            <Typography 
-            variant="h6" 
+            <AppTypography
+            intent="headingSmall"
             gutterBottom
             sx={{
-                // Title Clamping
-                display: '-webkit-box',
-                overflow: 'hidden',
-                WebkitBoxOrient: 'vertical',
-                WebkitLineClamp: 2,
+              // Title Clamping
+              display: '-webkit-box',
+              overflow: 'hidden',
+              WebkitBoxOrient: 'vertical',
+              WebkitLineClamp: 2,
             }}
             >
             {title}
-            </Typography>
+            </AppTypography>
 
-            <Typography 
-            variant="body2" 
-            color="text.secondary"
+            <AppTypography
+            intent="bodySecondary"
             sx={{
-                // Description Clamping
-                display: '-webkit-box',
-                overflow: 'hidden',
-                WebkitBoxOrient: 'vertical',
-                WebkitLineClamp: 3,
+              // Description Clamping
+              display: '-webkit-box',
+              overflow: 'hidden',
+              WebkitBoxOrient: 'vertical',
+              WebkitLineClamp: 3,
             }}
             >
             {description}
-            </Typography>
+            </AppTypography>
         </CardContent>
       </CardActionArea>
       

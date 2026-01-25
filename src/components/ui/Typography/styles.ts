@@ -18,4 +18,32 @@ export const typographyStyles: Record<
     fontWeight: theme.typography.body2.fontWeight,
     color: theme.palette.text.secondary,
   }),
+  
+  headingLarge: theme => ({
+    fontSize: theme.typography.h3.fontSize,
+    lineHeight: theme.typography.h3.lineHeight,
+    fontWeight: 800,
+    color: theme.palette.text.primary,
+  }),
+
+  headingMedium: theme => ({
+    fontSize: theme.typography.h5.fontSize,
+    lineHeight: theme.typography.h5.lineHeight,
+    fontWeight: 600,
+    color: theme.palette.text.primary,
+  }),
+
+  headingSmall: theme => ({
+    fontSize: theme.typography.h6.fontSize,
+    lineHeight: theme.typography.h6.lineHeight,
+    fontWeight: theme.typography.h6.fontWeight,
+    color: theme.palette.text.primary,
+  }),
+
+  caption: theme => ({
+    fontSize: theme.typography.caption.fontSize,
+    lineHeight: theme.typography.caption.lineHeight,
+    fontWeight: theme.typography.caption.fontWeight,
+    color: theme.palette.text.secondary,
+  }),
 };

@@ -4,7 +4,7 @@ import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
+import { AppTypography } from "../components/ui/Typography/AppTypography";
 import Autocomplete from "@mui/material/Autocomplete";
 import Chip from "@mui/material/Chip";
 import Snackbar from "@mui/material/Snackbar";
@@ -102,12 +102,9 @@ export default function CreatePost() {
           }}
         >
           {/* Header */}
-          <Typography variant="h5" fontWeight={600}>
-            Create New Post
-          </Typography>
-          
-          <Typography color="text.secondary" variant="body2">             Share your thoughts with the community
- </Typography>
+          <AppTypography intent="headingMedium">Create New Post</AppTypography>
+
+          <AppTypography intent="bodySecondary">Share your thoughts with the community</AppTypography>
 
 
           <Divider sx={{ my: 3 }} />
@@ -117,7 +114,7 @@ export default function CreatePost() {
             <Stack spacing={3}>
               {/* Image Upload */}
               <Stack spacing={1}>
-                <Typography variant="subtitle2">Cover image</Typography>
+                <AppTypography intent="headingSmall">Cover image</AppTypography>
 
                 <Box
                   sx={{

@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
+import { AppTypography } from "./ui/Typography/AppTypography";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Chip from "@mui/material/Chip";
@@ -19,7 +19,7 @@ export default function BlogDetail() {
     return (
       // SEPARATED PAGE NOT FOUND AND POST NOT FOUND
       <Container sx={{ py: 10, textAlign: "center" }}>
-        <Typography variant="h5">Post not found</Typography>
+        <AppTypography intent="headingMedium">Post not found</AppTypography>
         <Button onClick={() => navigate("/")} sx={{ mt: 2 }}>
           Go Home
         </Button>
@@ -57,23 +57,18 @@ export default function BlogDetail() {
       )}
 
       {/* Title & Meta */}
-      <Typography variant="h3" component="h1" gutterBottom fontWeight="bold">
-        {post.title}
-      </Typography>
+      <AppTypography intent="headingLarge" component="h1" gutterBottom>{post.title}</AppTypography>
       
       <Stack direction="row" spacing={1} sx={{ mb: 4 }}>
         <Chip label="React" size="small" />
         <Chip label="Tech" size="small" />
-        <Typography variant="caption" sx={{ alignSelf: "center", color: "text.secondary" }}>
-          5 min read
-        </Typography>
+        <AppTypography intent="caption">5 min read</AppTypography>
       </Stack>
 
       {/* Content Body */}
-      <Typography variant="body1" sx={{ lineHeight: 1.8, fontSize: "1.1rem" }}>
-        {/* CHECK HERE IN FUTURE AS OF NOW JUST RANDOM STRING USED */}
-        {post.description} 
-      </Typography>
+      <AppTypography intent="bodyPrimary">
+        {post.description}
+      </AppTypography>
     </Container>
   );
 }

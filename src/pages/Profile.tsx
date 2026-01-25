@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
-import Typography from "@mui/material/Typography";
+import { AppTypography } from "../components/ui/Typography/AppTypography";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -43,11 +43,8 @@ export default function Profile() {
     <>
       <Box sx={{ display: "flex", justifyContent: "center", py: 6, px: 2 }}>
         <Paper sx={{ width: "100%", maxWidth: 720, p: 4 }} elevation={2}>
-          <Typography variant="h5" fontWeight={600}>
-            Profile
-          </Typography>
-          <Typography color="text.secondary" variant="body2">    Manage your account information
- </Typography>
+          <AppTypography intent="headingMedium">Profile</AppTypography>
+          <AppTypography intent="bodySecondary">Manage your account information</AppTypography>
 
           <Divider sx={{ my: 3 }} />
 

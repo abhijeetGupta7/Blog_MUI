@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
-import Typography from "@mui/material/Typography";
+import { AppTypography } from "../ui/Typography/AppTypography";
 import Link from "@mui/material/Link";
 import React from "react";
 
@@ -26,9 +26,7 @@ function AppFooter() {
         }}
       >
         {/* Left side */}
-        <Typography variant="body2" color="text.secondary">
-          © {new Date().getFullYear()} MyBlog. All rights reserved.
-        </Typography>
+        <AppTypography intent="bodySecondary">© {new Date().getFullYear()} MyBlog. All rights reserved.</AppTypography>
 
         {/* Right side */}
         <Box>

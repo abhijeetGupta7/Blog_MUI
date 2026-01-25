@@ -6,7 +6,8 @@ import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
   import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
   import AuthFormWrapper from "./AuthFormWrapper";
-import { Typography, Divider } from "@mui/material";
+  import Divider from "@mui/material/Divider";
+  import { AppTypography } from "../../components/ui/Typography/AppTypography";
 import InputAdornment from "@mui/material/InputAdornment";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
@@ -17,7 +18,7 @@ import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
         <AuthFormWrapper title="Create your account">
           <Stack spacing={3}>
             
-          <Typography color="text.secondary" variant="body2"> Join us and start sharing your thoughts. </Typography>
+          <AppTypography intent="bodySecondary">Join us and start sharing your thoughts.</AppTypography>
 
               {/* NEED */}
             {/* Inputs */}
@@ -77,18 +78,12 @@ import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
             </Button>
   
             <Divider>
-      <Typography
-        variant="caption"
-        color="text.secondary"
-        sx={{ px: 1 }} 
-      >
-        or
-      </Typography>
+      <AppTypography intent="caption" sx={{px:1}}>or</AppTypography>
     </Divider>
   
             {/* Secondary action */}
             <Box sx={{ textAlign: "center" }}>
-            <Typography color="text.secondary" variant="body2"> Already have an account? </Typography>
+            <AppTypography intent="bodySecondary">Already have an account?</AppTypography>
                {/* MUI LINK tag is normal <a> tag, so must wrap it inside react router dom */}
               <Link href="/signin" underline="hover">
                 Sign in instead

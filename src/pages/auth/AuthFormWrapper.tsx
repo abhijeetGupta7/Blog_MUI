@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
-import Typography from "@mui/material/Typography";
+import { AppTypography } from "../../components/ui/Typography/AppTypography";
 import React from "react";
 
 type AuthFormWrapperProps = {
@@ -14,9 +14,8 @@ function AuthFormWrapper({
 }: AuthFormWrapperProps) {
   return (
     <Paper elevation={2} sx={{ p: 4 }}>
-      <Typography variant="h5" gutterBottom>
-        {title}
-      </Typography>
+      <AppTypography intent="headingMedium">{title}</AppTypography>
+      
       <Box sx={{ mt: 2 }}>
         {children}
       </Box>

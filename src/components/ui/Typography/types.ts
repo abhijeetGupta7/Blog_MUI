@@ -1,3 +1,7 @@
 export type AppTypographyIntent =
   | "bodyPrimary"
-  | "bodySecondary";
+  | "bodySecondary"
+  | "headingLarge"
+  | "headingMedium"
+  | "headingSmall"
+  | "caption";
