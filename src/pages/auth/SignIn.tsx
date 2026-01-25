@@ -9,13 +9,15 @@ import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
+import { AppTypography } from "../../components/ui/Typography/AppTypography";
 
   function SignIn() {
     return (
       <AuthFormWrapper title="Welcome back">
         <Stack spacing={3}>
-          <Typography color="text.secondary" variant="body2"> Sign in to continue to your account. </Typography>
-
+      
+          <AppTypography intent="bodySecondary"> Sign in to continue to your account. </AppTypography>
+          
           <Stack spacing={2}>
           <TextField
       label="Email address"
@@ -63,7 +65,8 @@ import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
     </Divider>
   
           <Box sx={{ textAlign: "center" }}>
-          <Typography color="text.secondary" variant="body2"> Don’t have an account? </Typography>
+          <AppTypography intent="bodySecondary"> Don’t have an account? </AppTypography>
+          
             {/* need */}
             <Link href="/signup" underline="hover">
               Create one
