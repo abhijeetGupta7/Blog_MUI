@@ -15,5 +15,5 @@ export const AppTypography = styled(Typography, {
   })<AppTypographyProps>(({ theme, intent = "bodyPrimary" }) => ({
     fontFamily: theme.typography.fontFamily,
     ...typographyStyles[intent](theme),
-  }));
+}));
   

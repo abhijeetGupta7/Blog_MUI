@@ -4,12 +4,11 @@ import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
 import AuthFormWrapper from "./AuthFormWrapper";
 import Divider from "@mui/material/Divider";
-import TextField from "@mui/material/TextField";
-import InputAdornment from "@mui/material/InputAdornment";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import { AppTypography } from "../../components/ui/Typography/AppTypography";
 import { AppButton } from "../../components/ui/Button/AppButton";
+import { AppTextField } from "../../components/ui/TextField/AppTextField";
 
   function SignIn() {
     return (
@@ -19,34 +18,18 @@ import { AppButton } from "../../components/ui/Button/AppButton";
           <AppTypography intent="bodySecondary"> Sign in to continue to your account. </AppTypography>
           
           <Stack spacing={2}>
-          <TextField
-      label="Email address"
-      type="email"
-      fullWidth
-      slotProps={{
-        input: {
-          startAdornment: (
-            <InputAdornment position="start">
-              <EmailOutlinedIcon />
-            </InputAdornment>
-          ),
-        },
-      }}
-    />
-             <TextField
-      label="Password"
-      type="password"
-      fullWidth
-      slotProps={{
-        input: {
-          startAdornment: (
-            <InputAdornment position="start">
-              <LockOutlinedIcon />
-            </InputAdornment>
-          ),
-        },
-      }}
-    />
+
+          <AppTextField
+  label="Email address"
+  type="email"
+  startIcon={<EmailOutlinedIcon />}
+/>
+
+<AppTextField
+  label="Password"
+  type="password"
+  startIcon={<LockOutlinedIcon />}
+/>
           </Stack>
 
           <AppButton intent="primary"> Sign In </AppButton>       

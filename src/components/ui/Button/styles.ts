@@ -53,13 +53,11 @@ export const buttonStyles: Record<
     padding: theme.spacing(1, 2), 
     
     backgroundColor: "transparent",
-    color: theme.palette.text.primary, // 👈 Uses Black/White instead of Blue
+    color: theme.palette.text.primary,
     boxShadow: "none",
 
     "&:hover": {
-      backgroundColor: theme.palette.action.hover, // Subtle gray background
-      // Optional: Change text to primary on hover?
-      // color: theme.palette.primary.main, 
+      backgroundColor: theme.palette.action.hover,
     },
   }),
 };

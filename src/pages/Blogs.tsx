@@ -2,8 +2,6 @@ import { useMemo, useState } from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import { AppTypography } from "../components/ui/Typography/AppTypography";
-import TextField from "@mui/material/TextField";
-import InputAdornment from "@mui/material/InputAdornment";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import Chip from "@mui/material/Chip";
@@ -12,6 +10,7 @@ import Divider from "@mui/material/Divider";
 import SearchIcon from "@mui/icons-material/Search";
 import AppCard from "../components/AppCard";
 import { BLOG_POSTS } from "../data/mockData";
+import { AppTextField } from "../components/ui/TextField/AppTextField";
 
 /* -------------------------------------------------------------------------- */
 /* CONFIG */
@@ -89,18 +88,11 @@ export default function Blogs() {
         sx={{ mb: 4 }}
       >
         {/* SEARCH */}
-        <TextField
+        <AppTextField
           placeholder="Search blogs…"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          fullWidth
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <SearchIcon />
-              </InputAdornment>
-            ),
-          }}
+          startIcon={<SearchIcon />} 
         />
 
         {/* SORT */}

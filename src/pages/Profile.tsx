@@ -3,7 +3,6 @@ import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import { AppTypography } from "../components/ui/Typography/AppTypography";
 import Stack from "@mui/material/Stack";
-import TextField from "@mui/material/TextField";
 import Avatar from "@mui/material/Avatar";
 import Divider from "@mui/material/Divider";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -13,6 +12,8 @@ import Alert from "@mui/material/Alert";
 import PhotoCameraOutlinedIcon from "@mui/icons-material/PhotoCameraOutlined";
 import { MOCK_USER } from "../data/mockUser";
 import { AppButton } from "../components/ui/Button/AppButton";
+import { AppTextField } from "../components/ui/TextField/AppTextField";
+
 
 export default function Profile() {
   const [username, setUsername] = useState(MOCK_USER.username);
@@ -69,20 +70,18 @@ export default function Profile() {
               </Stack>
 
               {/* Username */}
-              <TextField
+              <AppTextField
                 label="Username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                fullWidth
               />
 
               {/* Email */}
-              <TextField
+              <AppTextField
                 label="Email"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                fullWidth
               />
 
               {/* Change password toggle */}
@@ -97,12 +96,11 @@ export default function Profile() {
               />
 
               {changePassword && (
-                <TextField
+                <AppTextField
                   label="New password"
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  fullWidth
                   helperText="Minimum 6 characters"
                 />
               )}

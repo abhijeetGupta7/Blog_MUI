@@ -2,7 +2,6 @@ import { useCallback, useMemo, useState } from "react";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
-import TextField from "@mui/material/TextField";
 import { AppTypography } from "../components/ui/Typography/AppTypography";
 import Autocomplete from "@mui/material/Autocomplete";
 import Chip from "@mui/material/Chip";
@@ -12,6 +11,7 @@ import Divider from "@mui/material/Divider";
 import PhotoCameraOutlinedIcon from "@mui/icons-material/PhotoCameraOutlined";
 import { useNavigate } from "react-router-dom";
 import { AppButton } from "../components/ui/Button/AppButton";
+import { AppTextField } from "../components/ui/TextField/AppTextField";
 
 const TAG_OPTIONS = [
   "React",
@@ -106,7 +106,6 @@ export default function CreatePost() {
 
           <AppTypography intent="bodySecondary">Share your thoughts with the community</AppTypography>
 
-
           <Divider sx={{ my: 3 }} />
 
           {/* Form */}
@@ -153,11 +152,10 @@ export default function CreatePost() {
               </Stack>
 
               {/* Title */}
-              <TextField
+              <AppTextField
                 label="Title"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                fullWidth
                 required
               />
 
@@ -177,7 +175,7 @@ export default function CreatePost() {
                   ))
                 }
                 renderInput={(params) => (
-                  <TextField
+                  <AppTextField
                     {...params}
                     label="Tags"
                     placeholder="Select relevant tags"
@@ -186,13 +184,12 @@ export default function CreatePost() {
               />
 
               {/* Description */}
-              <TextField
+              <AppTextField
                 label="Description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 multiline
                 minRows={6}
-                fullWidth
               />
 
               {/* Actions */}

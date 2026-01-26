@@ -1,16 +1,15 @@
 import React from "react";
-import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
-  import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
-  import AuthFormWrapper from "./AuthFormWrapper";
-  import Divider from "@mui/material/Divider";
-  import { AppTypography } from "../../components/ui/Typography/AppTypography";
-import InputAdornment from "@mui/material/InputAdornment";
+import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
+import AuthFormWrapper from "./AuthFormWrapper";
+import Divider from "@mui/material/Divider";
+import { AppTypography } from "../../components/ui/Typography/AppTypography";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import { AppButton } from "../../components/ui/Button/AppButton";
+import { AppTextField } from "../../components/ui/TextField/AppTextField";
 
   function SignUp() {
     return (
@@ -22,48 +21,23 @@ import { AppButton } from "../../components/ui/Button/AppButton";
               {/* NEED */}
             {/* Inputs */}
             <Stack spacing={2}>
-              <TextField
-                label="Username"
-                fullWidth
-                slotProps={{
-                  input: {
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <PersonOutlineIcon />
-                      </InputAdornment>
-                    ),
-                  },
-                }}
-              />
+            <AppTextField
+  label="Username"
+  startIcon={<PersonOutlineIcon />}
+/>
   
-  <TextField
-      label="Email address"
-      type="email"
-      fullWidth
-      slotProps={{
-        input: {
-          startAdornment: (
-            <InputAdornment position="start">
-              <EmailOutlinedIcon />
-            </InputAdornment>
-          ),
-        },
-      }}
-    />
-                <TextField
-                     label="Password"
-                     type="password"
-                     fullWidth
-                     slotProps={{
-                       input: {
-                         startAdornment: (
-                           <InputAdornment position="start">
-                             <LockOutlinedIcon />
-                           </InputAdornment>
-                         ),
-                       },
-                     }}
-                   />
+  
+          <AppTextField
+  label="Email address"
+  type="email"
+  startIcon={<EmailOutlinedIcon />}
+/>
+
+<AppTextField
+  label="Password"
+  type="password"
+  startIcon={<LockOutlinedIcon />}
+/>
             </Stack>
                 
             <AppButton intent="primary">Create Account</AppButton>
