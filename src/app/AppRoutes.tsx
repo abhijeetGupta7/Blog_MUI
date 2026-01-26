@@ -2,7 +2,7 @@ import { Suspense, lazy } from "react";
 import PageLoader from "../components/PageLoader";
 import { Routes, Route, Navigate } from "react-router-dom";
 
-// Lazy-loaded pages 
+// Lazy-loaded pages
 const SignIn = lazy(() => import("../pages/auth/SignIn"));
 const SignUp = lazy(() => import("../pages/auth/SignUp"));
 const Home = lazy(() => import("../pages/Home"));
@@ -15,7 +15,7 @@ const Blogs = lazy(() => import("../pages/Blogs"));
 
 export default function AppRoutes() {
   return (
-    <Suspense fallback={<PageLoader />}> 
+    <Suspense fallback={<PageLoader />}>
       <Routes>
         {/* AUTH ROUTES */}
         <Route element={<AuthLayout />}>

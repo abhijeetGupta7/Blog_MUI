@@ -1,11 +1,10 @@
 import { useMemo, useState } from "react";
-import Box from "@mui/material/Box";
+import { AppStack } from "../components/ui/layout";
 import Grid from "@mui/material/Grid";
 import { AppTypography } from "../components/ui/Typography/AppTypography";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import Chip from "@mui/material/Chip";
-import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
 import SearchIcon from "@mui/icons-material/Search";
 import AppCard from "../components/AppCard";
@@ -74,18 +73,17 @@ export default function Blogs() {
   /* ---------------------------------------------------------------------- */
 
   return (
-    <Box>
+    <AppStack gap="lg">
       {/* PAGE HEADER */}
-      <Box sx={{ mb: 4 }}>
+      <AppStack gap="xs">
         <AppTypography intent="headingLarge">All Blogs</AppTypography>
         <AppTypography intent="bodyPrimary">Browse, search, and explore all published articles</AppTypography>
-      </Box>
+      </AppStack>
 
       {/* FILTER BAR */}
-      <Stack
+      <AppStack
         direction={{ xs: "column", md: "row" }}
-        spacing={2}
-        sx={{ mb: 4 }}
+        gap="sm"
       >
         {/* SEARCH */}
         <AppTextField
@@ -104,10 +102,10 @@ export default function Blogs() {
           <MenuItem value="latest">Latest</MenuItem>
           <MenuItem value="oldest">Oldest</MenuItem>
         </Select>
-      </Stack>
+      </AppStack>
 
       {/* TAG FILTER */}
-      <Stack direction="row" spacing={1} sx={{ mb: 3, flexWrap: "wrap" }}>
+      <AppStack direction="row" gap="xs" flexWrap="wrap">
         <Chip
           label="All"
           clickable
@@ -123,19 +121,19 @@ export default function Blogs() {
             onClick={() => setSelectedTag(tag)}
           />
         ))}
-      </Stack>
+      </AppStack>
 
-      <Divider sx={{ mb: 4 }} />
+      <Divider />
 
       {/* BLOG GRID */}
       <Grid container spacing={4}>{postCards}</Grid>
 
       {/* EMPTY STATE */}
       {filteredPosts.length === 0 && (
-        <Box sx={{ mt: 6, textAlign: "center" }}>
+        <AppStack alignItems="center" gap="xl">
           <AppTypography intent="bodySecondary">No blogs found.</AppTypography>
-        </Box>
+        </AppStack>
       )}
-    </Box>
+    </AppStack>
   );
 }

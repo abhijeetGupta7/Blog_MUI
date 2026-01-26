@@ -4,7 +4,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer"; 
 import IconButton from "@mui/material/IconButton";
-import Stack from "@mui/material/Stack"; 
+import { AppStack } from "../ui/layout";
 import MenuIcon from "@mui/icons-material/Menu";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
@@ -30,10 +30,8 @@ function AppHeader() {
   // 4. Content inside the Mobile Drawer
   const drawerContent = (
     <Box sx={{ width: 250, p: 2, pt: 4 }}>
-      <Stack spacing={2}>
-        <AppTypography intent="headingSmall" sx={{ mb: 2, px: 1 }}>
-          Menu
-        </AppTypography>
+      <AppStack gap="sm">
+        <AppTypography intent="headingSmall">Menu</AppTypography>
         
         {/* Mobile Links - Stacked Vertically */}
         <AppButton component={RouterLink} to="/" intent="ghost" onClick={handleLinkClick} sx={{ justifyContent: "flex-start" }}>
@@ -48,7 +46,7 @@ function AppHeader() {
         <AppButton component={RouterLink} to="/profile" intent="ghost" onClick={handleLinkClick} sx={{ justifyContent: "flex-start" }}>
           Profile
         </AppButton>
-      </Stack>
+      </AppStack>
     </Box>
   );
 

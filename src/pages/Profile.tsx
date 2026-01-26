@@ -2,7 +2,7 @@ import { useState } from "react";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import { AppTypography } from "../components/ui/Typography/AppTypography";
-import Stack from "@mui/material/Stack";
+import { AppStack } from "../components/ui/layout";
 import Avatar from "@mui/material/Avatar";
 import Divider from "@mui/material/Divider";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -50,9 +50,9 @@ export default function Profile() {
           <Divider sx={{ my: 3 }} />
 
           <Box component="form" onSubmit={handleSave}>
-            <Stack spacing={3}>
+            <AppStack gap="md">
               {/* Avatar */}
-              <Stack direction="row" spacing={3} alignItems="center">
+              <AppStack direction="row" gap="md" alignItems="center">
                 <Avatar
                   src={avatarPreview ?? undefined}
                   sx={{ width: 96, height: 96 }}
@@ -67,7 +67,7 @@ export default function Profile() {
                   <input hidden type="file" accept="image/*" onChange={handleImageChange} />
                 </AppButton>
 
-              </Stack>
+              </AppStack>
 
               {/* Username */}
               <AppTextField
@@ -106,15 +106,15 @@ export default function Profile() {
               )}
 
               {/* Actions */}
-              <Stack direction="row" spacing={2} justifyContent="flex-end">
+              <AppStack direction="row" gap="sm" justifyContent="flex-end">
                 <AppButton intent="secondary">Cancel</AppButton>
                 
                 <AppButton type="submit" intent="primary">
                   Save changes
                 </AppButton>
                 
-              </Stack>
-            </Stack>
+              </AppStack>
+            </AppStack>
           </Box>
         </Paper>
       </Box>

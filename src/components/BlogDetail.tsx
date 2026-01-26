@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import { AppTypography } from "./ui/Typography/AppTypography";
 import Container from "@mui/material/Container";
 import Chip from "@mui/material/Chip";
-import Stack from "@mui/material/Stack";
+import { AppStack } from "./ui/layout";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { BLOG_POSTS } from "../data/mockData";
 import { AppButton } from "./ui/Button/AppButton";
@@ -60,11 +60,11 @@ export default function BlogDetail() {
       {/* Title & Meta */}
       <AppTypography intent="headingLarge" component="h1" gutterBottom>{post.title}</AppTypography>
       
-      <Stack direction="row" spacing={1} sx={{ mb: 4 }}>
+      <AppStack direction="row" gap="xs">
         <Chip label="React" size="small" />
         <Chip label="Tech" size="small" />
         <AppTypography intent="caption">5 min read</AppTypography>
-      </Stack>
+      </AppStack>
 
       {/* Content Body */}
       <AppTypography intent="bodyPrimary">

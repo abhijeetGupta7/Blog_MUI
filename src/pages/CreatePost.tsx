@@ -1,7 +1,7 @@
 import { useCallback, useMemo, useState } from "react";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
-import Stack from "@mui/material/Stack";
+import { AppStack } from "../components/ui/layout";
 import { AppTypography } from "../components/ui/Typography/AppTypography";
 import Autocomplete from "@mui/material/Autocomplete";
 import Chip from "@mui/material/Chip";
@@ -110,9 +110,9 @@ export default function CreatePost() {
 
           {/* Form */}
           <Box component="form" onSubmit={handleSubmit}>
-            <Stack spacing={3}>
+            <AppStack gap="md">
               {/* Image Upload */}
-              <Stack spacing={1}>
+              <AppStack gap="xs">
                 <AppTypography intent="headingSmall">Cover image</AppTypography>
 
                 <Box
@@ -149,7 +149,7 @@ export default function CreatePost() {
                     <input hidden type="file" accept="image/*" onChange={handleImageChange} />
                   </AppButton>
                 </Box>
-              </Stack>
+              </AppStack>
 
               {/* Title */}
               <AppTextField
@@ -193,7 +193,7 @@ export default function CreatePost() {
               />
 
               {/* Actions */}
-              <Stack direction="row" spacing={2} justifyContent="flex-end">
+              <AppStack direction="row" gap="sm" justifyContent="flex-end">
             
                 <AppButton intent="text" onClick={resetForm}>
                   Reset
@@ -202,8 +202,8 @@ export default function CreatePost() {
                 <AppButton type="submit">
                   Publish
                 </AppButton>
-              </Stack>
-            </Stack>
+              </AppStack>
+            </AppStack>
           </Box>
         </Paper>
       </Box>
