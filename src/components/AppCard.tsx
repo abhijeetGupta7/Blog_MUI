@@ -1,98 +1,51 @@
 import React from "react";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardActionArea from "@mui/material/CardActionArea";
-import { AppTypography } from "./ui/Typography/AppTypography";
-import CardMedia from "@mui/material/CardMedia";
-import Box from "@mui/material/Box";
 import { Link as RouterLink } from "react-router-dom";
+import { 
+  AppCardRoot, 
+  AppCardAction, 
+  AppCardMedia, 
+  AppCardMediaContainer, 
+  AppCardContent, 
+  AppCardTitle, 
+  AppCardDescription 
+} from "./ui/Card"; 
 
 type AppCardProps = {
   title: string;
   description: string;
   image?: string;
-  href:string;
+  href: string;
 };
 
-function AppCard({
-  title,
-  description,
-  image,
-  href,
-}: AppCardProps) {
+function AppCard({ title, description, image, href }: AppCardProps) {
   return (
-    <Card 
-      elevation={3}
-      sx={{
-        height: '100%',
-        display: 'flex', 
-        flexDirection: 'column', 
-      }}
-    >
-
-        <CardActionArea
-            component={RouterLink}
-            to={href}
-            sx={{
-                height: "100%",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "stretch",
-                justifyContent:"flex-start",
-                // removing the grey effect
-                "& .MuiCardActionArea-focusHighlight": {
-                    display: "none",
-                },
-                // image scaling
-                "&:hover .MuiCardMedia-root": {
-                    transform: "scale(1.15)",
-                  },
-            }}
-        >
-      
-        <Box sx={{ overflow: "hidden", width: "100%" }}>
-            {image && (
-            <CardMedia
-                component="img"
-                height="200"
-                image={image}
-                alt={title}
-                loading="lazy"
+    <AppCardRoot elevation={1} interactive>
+      <AppCardAction component={RouterLink} to={href}>
+        
+        <AppCardMediaContainer height={220}> 
+          {image && (
+            <AppCardMedia 
+              component="img" 
+              image={image} 
+              alt={title} 
+              loading="lazy" 
+              height="100%"
             />
-            )}
-        </Box>
+          )}
+        </AppCardMediaContainer>
 
-        <CardContent sx={{ flexGrow: 1 }}>
-            <AppTypography
-            intent="headingSmall"
-            gutterBottom
-            sx={{
-              // Title Clamping
-              display: '-webkit-box',
-              overflow: 'hidden',
-              WebkitBoxOrient: 'vertical',
-              WebkitLineClamp: 2,
-            }}
-            >
+        <AppCardContent>
+          <AppCardTitle intent="headingSmall" gutterBottom>
             {title}
-            </AppTypography>
+          </AppCardTitle>
 
-            <AppTypography
-            intent="bodySecondary"
-            sx={{
-              // Description Clamping
-              display: '-webkit-box',
-              overflow: 'hidden',
-              WebkitBoxOrient: 'vertical',
-              WebkitLineClamp: 3,
-            }}
-            >
+          <AppCardDescription intent="bodySecondary" clamp={3}>
             {description}
-            </AppTypography>
-        </CardContent>
-      </CardActionArea>
-      
-    </Card>
+          </AppCardDescription>
+        </AppCardContent>
+
+      </AppCardAction>
+    </AppCardRoot>
   );
 }
 

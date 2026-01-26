@@ -1,16 +1,19 @@
-import { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import Box from "@mui/material/Box";
-import { AppTypography } from "./ui/Typography/AppTypography";
-import Card from "@mui/material/Card";
-import CardActionArea from "@mui/material/CardActionArea";
-import CardContent from "@mui/material/CardContent";
 import IconButton from "@mui/material/IconButton";
 import Chip from "@mui/material/Chip";
-import { alpha } from "@mui/material/styles";
-import React from "react";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+
+// System Components; 
 import { BLOG_POSTS } from "../data/mockData";
+import { AppStack } from "./ui/layout";
+import { AppHeroCard } from "./ui/Card/AppHeroCard";
+import { AppTypography } from "./ui/Typography/AppTypography";
+
+/* -------------------------------------------------------------------------- */
+/* WRAPPER (Handles Logic: Intersection Observer)                             */
+/* -------------------------------------------------------------------------- */
 
 function HeroCard({ item }: { item: typeof BLOG_POSTS[0] }) {
   const cardRef = useRef<HTMLDivElement>(null);
@@ -33,115 +36,29 @@ function HeroCard({ item }: { item: typeof BLOG_POSTS[0] }) {
   }, []);
 
   return (
-    <Card
+    <AppHeroCard
       ref={cardRef}
-      elevation={0}
-      sx={{
-        minWidth: { xs: 300, md: 520 },
-        height: 520,
-        flexShrink: 0,
-        scrollSnapAlign: "center",
-        borderRadius: 4,
-        overflow: "hidden",
-        position: "relative",
-
-        transform: active ? "scale(1)" : "scale(0.85)",
-        opacity: active ? 1 : 0.5,
-
-        transition:
-          "transform 600ms cubic-bezier(0.2,0,0,1), opacity 400ms ease",
-        willChange: "transform, opacity",
-      }}
-    >
-      <CardActionArea
-        sx={{
-          height: "100%",
-          "& .MuiCardActionArea-focusHighlight": { display: "none" },
-        }}
-      >
-        {/* IMAGE */}
-        <Box sx={{ position: "absolute", inset: 0, overflow: "hidden" }}>
-          <Box
-            component="img"
-            src={item.image}
-            alt={item.title}
-            loading="lazy"
-            decoding="async"
-            sx={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              transform: active ? "scale(1.15)" : "scale(1)",
-              transition: "transform 800ms cubic-bezier(0.2,0,0,1)",
-              willChange: "transform",
-            }}
-          />
-
-          {/* GRADIENT */}
-          <Box
-            sx={{
-              position: "absolute",
-              inset: 0,
-              background: `linear-gradient(to top, ${alpha(
-                "#000",
-                0.85
-              )} 0%, transparent 60%)`,
-            }}
-          />
-        </Box>
-
-        {/* CONTENT */}
-        <CardContent
-          sx={{
-            position: "absolute",
-            bottom: 0,
-            width: "100%",
-            p: 4,
-            color: "white",
-            transform: active ? "translateY(0)" : "translateY(20px)",
-            transition: "transform 500ms cubic-bezier(0.2,0,0,1)",
-          }}
-        >
-          <Chip
-            label="Featured"
-            size="small"
-            sx={{
-              mb: 2,
-              bgcolor: "white",
-              color: "black",
-              fontWeight: 700,
-            }}
-          />
-
-          <AppTypography intent="headingMedium" sx={{ lineHeight: 1.1, mb: 1 }}>
-            {item.title}
-          </AppTypography>
-
-          <AppTypography
-            intent="bodyPrimary"
-            sx={{
-              color: "rgba(255,255,255,0.85)",
-              display: "-webkit-box",
-              WebkitLineClamp: 2,
-              WebkitBoxOrient: "vertical",
-              overflow: "hidden",
-              maxHeight: active ? 80 : 0,
-              opacity: active ? 1 : 0,
-              transition: "opacity 300ms ease, max-height 300ms ease",
-            }}
-          >
-            {item.description}
-          </AppTypography>
-        </CardContent>
-      </CardActionArea>
-    </Card>
+      active={active}
+      image={item.image}
+      title={item.title}
+      description={item.description}
+      href={`/blog/${item.id}`} // Mock link
+      // Inject the Chip into the custom slot
+      topContent={
+        <Chip
+          label="Featured"
+          size="small"
+          sx={{ bgcolor: "white", color: "black", fontWeight: 700 }}
+        />
+      }
+    />
   );
 }
 
 const MemoHeroCard = React.memo(HeroCard);
 
 /* -------------------------------------------------------------------------- */
-/* HERO CAROUSEL */
+/* CAROUSEL TRACK                                                             */
 /* -------------------------------------------------------------------------- */
 
 export default function HeroCarousel() {
@@ -155,18 +72,18 @@ export default function HeroCarousel() {
   };
 
   return (
-    <Box sx={{ py: 6 }}>
+    <AppStack gap="lg" sx={{ py: 6 }}>
+      
       {/* HEADER */}
-      <Box
-        sx={{
-          mb: 4,
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
+      <AppStack 
+        direction="row" 
+        justifyContent="space-between" 
+        alignItems="center"
+        sx={{ px: { xs: 2, md: 0 } }}
       >
-        <AppTypography intent="headingLarge">Featured Blogs</AppTypography>
-
+        <AppTypography intent="headingLarge">
+          Featured Blogs
+        </AppTypography>
 
         <Box sx={{ display: { xs: "none", md: "flex" }, gap: 1 }}>
           <IconButton onClick={() => scroll("left")}>
@@ -176,9 +93,9 @@ export default function HeroCarousel() {
             <ArrowForwardIosIcon />
           </IconButton>
         </Box>
-      </Box>
+      </AppStack>
 
-      {/* TRACK */}
+      {/* TRACK (Kept as Box for specific scroll logic) */}
       <Box
         ref={scrollRef}
         sx={{
@@ -186,7 +103,7 @@ export default function HeroCarousel() {
           gap: 2,
           overflowX: "auto",
           scrollSnapType: "x mandatory",
-          px: { xs: 2, md: "calc(50vw - 210px)" },
+          px: { xs: 2, md: "calc(50vw - 210px)" }, // Center logic preserved
           pb: 4,
 
           "&::-webkit-scrollbar": { display: "none" },
@@ -197,6 +114,7 @@ export default function HeroCarousel() {
           <MemoHeroCard key={item.id} item={item} />
         ))}
       </Box>
-    </Box>
+      
+    </AppStack>
   );
 }

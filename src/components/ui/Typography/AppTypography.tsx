@@ -3,7 +3,7 @@ import { styled } from "@mui/material/styles";
 import type { AppTypographyIntent } from "./types";
 import { typographyStyles } from "./styles";
 
-interface AppTypographyProps extends TypographyProps {
+export interface AppTypographyProps extends TypographyProps {
   /**
    * Semantic intent for typography.
    */
