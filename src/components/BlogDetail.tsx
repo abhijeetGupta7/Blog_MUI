@@ -53,7 +53,6 @@ export default function BlogDetail() {
       {/* Blog Image */}
       {post.image && (
         <BlogImage
-          component="img"
           src={post.image}
           alt={post.title}
           loading="eager"
