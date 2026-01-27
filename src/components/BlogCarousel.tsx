@@ -11,7 +11,7 @@ import {
   CarouselNavigation,
   CarouselTrack,
 } from "./ui/Carousel";
-import { FeaturedChip } from "./ui/Chip";
+import { AppChip } from "./ui/Chip/AppChip";
 
 function HeroCard({ item }: { item: typeof BLOG_POSTS[0] }) {
   const cardRef = useRef<HTMLDivElement>(null);
@@ -41,7 +41,7 @@ function HeroCard({ item }: { item: typeof BLOG_POSTS[0] }) {
       title={item.title}
       description={item.description}
       href={`/blog/${item.id}`}
-      topContent={<FeaturedChip label="Featured" size="small" />}
+      topContent={<AppChip label="Featured" size="small" />}
     />
   );
 }
