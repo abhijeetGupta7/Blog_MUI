@@ -8,7 +8,6 @@ export interface AppCardRootProps extends CardProps {
 export const AppCardRoot = styled(Card, {
   shouldForwardProp: (prop) => prop !== "interactive",
 })<AppCardRootProps>(({ theme, interactive = false }) => ({
-  // 1. Layout & Shape
   height: "100%",
   display: "flex",
   flexDirection: "column",
@@ -16,7 +15,6 @@ export const AppCardRoot = styled(Card, {
   borderRadius: (Number(theme.shape?.borderRadius) || 4) * 4,
   border: `1px solid ${theme.palette.divider}`,
   
-  // This ensures the card animates at the same speed as your Buttons/Inputs
   transition: theme.transitions.create(
     ["transform", "box-shadow", "border-color"], 
     {
@@ -25,7 +23,7 @@ export const AppCardRoot = styled(Card, {
     }
   ),
 
-  // 3. Interactive State
+  // Interactive State
   ...(interactive && {
     cursor: "pointer",
     "&:hover": {

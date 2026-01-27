@@ -5,5 +5,8 @@ export function createAppTheme(mode: "light" | "dark") {
     palette:{
       mode,
     },
+    typography: {
+      fontFamily: "'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif",
+    }    
   });
 }

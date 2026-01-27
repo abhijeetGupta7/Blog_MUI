@@ -1,12 +1,13 @@
 import React, { useMemo, lazy } from "react";
 import { AppTypography } from "../components/ui/Typography/AppTypography";
 import AppCard from "../components/AppCard";
-const BlogCarousel = lazy(() => import("../components/BlogCarousel"));
 import PageLoader from "../components/PageLoader";
 import { BLOG_POSTS } from "../data/mockData";
 import { AppStack, AppGrid } from "../components/ui/layout";
 import { SectionHeader, SectionTitle } from "../components/ui/Home";
 import { AppLink } from "../components/ui/Link/AppLink";
+
+const BlogCarousel = lazy(() => import("../components/BlogCarousel"));
 
 export default function Home() {
   const cards = useMemo(

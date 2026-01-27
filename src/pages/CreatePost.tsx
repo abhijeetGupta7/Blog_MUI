@@ -17,6 +17,7 @@ import {
 } from "../components/ui/Page";
 import { UploadPlaceholder, ImagePreview } from "../components/ui/Form";
 import { AppChip } from "../components/ui/Chip/AppChip";
+import { VisuallyHiddenInput } from "../components/ui/Form/VisuallyHiddenInput";
 
 const TAG_OPTIONS = [
   "React",
@@ -63,7 +64,7 @@ export default function CreatePost() {
         updateForm({ imagePreview: String(reader.result ?? null) });
       reader.readAsDataURL(file);
     },
-    [updateForm]
+    [updateForm],
   );
 
   const resetForm = useCallback(() => {
@@ -97,7 +98,7 @@ export default function CreatePost() {
 
       localStorage.setItem(
         "created_posts",
-        JSON.stringify([newPost, ...existing])
+        JSON.stringify([newPost, ...existing]),
       );
 
       setSnackbarOpen(true);
@@ -107,16 +108,14 @@ export default function CreatePost() {
         navigate("/");
       }, 800);
     },
-    [form, navigate, resetForm]
+    [form, navigate, resetForm],
   );
 
   return (
     <>
       <PageCenteringWrapper>
         <CreatePostCard intent="base" elevation={2} maxWidth={900}>
-          <AppTypography intent="headingMedium">
-            Create New Post
-          </AppTypography>
+          <AppTypography intent="headingMedium">Create New Post</AppTypography>
           <AppTypography intent="bodySecondary">
             Share your thoughts with the community
           </AppTypography>
@@ -126,16 +125,11 @@ export default function CreatePost() {
           <AppBox component="form" onSubmit={handleSubmit}>
             <AppStack gap="md">
               <AppStack gap="xs">
-                <AppTypography intent="headingSmall">
-                  Cover image
-                </AppTypography>
+                <AppTypography intent="headingSmall">Cover image</AppTypography>
 
                 <UploadPlaceholder>
                   {form.imagePreview && (
-                    <ImagePreview
-                      src={form.imagePreview}
-                      alt="Preview"
-                    />
+                    <ImagePreview src={form.imagePreview} alt="Preview" />
                   )}
 
                   <AppButton
@@ -144,8 +138,7 @@ export default function CreatePost() {
                     startIcon={<PhotoCameraOutlinedIcon />}
                   >
                     Upload image
-                    <input
-                      hidden
+                    <VisuallyHiddenInput
                       type="file"
                       accept="image/*"
                       onChange={handleImageChange}
@@ -157,9 +150,7 @@ export default function CreatePost() {
               <AppTextField
                 label="Title"
                 value={form.title}
-                onChange={(e) =>
-                  updateForm({ title: e.target.value ?? "" })
-                }
+                onChange={(e) => updateForm({ title: e.target.value ?? "" })}
                 required
               />
 
@@ -167,9 +158,7 @@ export default function CreatePost() {
                 multiple
                 options={tagOptions}
                 value={form.tags}
-                onChange={(_, value) =>
-                  updateForm({ tags: value ?? [] })
-                }
+                onChange={(_, value) => updateForm({ tags: value ?? [] })}
                 renderTags={(value, getTagProps) =>
                   value.map((option, index) => (
                     <AppChip
@@ -202,7 +191,9 @@ export default function CreatePost() {
                 <AppButton intent="text" onClick={resetForm}>
                   Reset
                 </AppButton>
-                <AppButton type="submit">Publish</AppButton>
+                <AppButton type="submit" disabled={snackbarOpen}>
+                  Publish
+                </AppButton>
               </AppStack>
             </AppStack>
           </AppBox>

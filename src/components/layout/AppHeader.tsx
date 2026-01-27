@@ -5,7 +5,7 @@ import Drawer from "@mui/material/Drawer";
 import MenuIcon from "@mui/icons-material/Menu";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
-import { AppStack, AppBox } from "../ui/layout"; 
+import { AppStack, AppBox } from "../ui/layout";
 import { AppTypography } from "../ui/Typography/AppTypography";
 import { useAppTheme } from "../../theme/AppThemeContext";
 
@@ -39,7 +39,11 @@ function AppHeader() {
         <DrawerNavButton to="/" intent="ghost" onClick={handleLinkClick}>
           Home
         </DrawerNavButton>
-        <DrawerNavButton to="/create-post" intent="ghost" onClick={handleLinkClick}>
+        <DrawerNavButton
+          to="/create-post"
+          intent="ghost"
+          onClick={handleLinkClick}
+        >
           Create
         </DrawerNavButton>
         <DrawerNavButton to="/signin" intent="ghost" onClick={handleLinkClick}>
@@ -55,33 +59,43 @@ function AppHeader() {
   return (
     <AppBar position="sticky" color="default" elevation={1}>
       <Toolbar>
-        
         <NavLink to="/">MyBlog</NavLink>
 
         <AppBox flexGrow={1} />
 
         <AppStack direction="row" alignItems="center" gap="sm">
-          
           <DesktopMenu>
-            <AppNavLinkButton to="/" intent="ghost">Home</AppNavLinkButton>
-            <AppNavLinkButton to="/create-post" intent="ghost">Create</AppNavLinkButton>
-            <AppNavLinkButton to="/signin" intent="ghost">Sign In</AppNavLinkButton>
-            <AppNavLinkButton to="/profile" intent="ghost">Profile</AppNavLinkButton>
+            <AppNavLinkButton to="/" intent="ghost">
+              Home
+            </AppNavLinkButton>
+            <AppNavLinkButton to="/create-post" intent="ghost">
+              Create
+            </AppNavLinkButton>
+            <AppNavLinkButton to="/signin" intent="ghost">
+              Sign In
+            </AppNavLinkButton>
+            <AppNavLinkButton to="/profile" intent="ghost">
+              Profile
+            </AppNavLinkButton>
           </DesktopMenu>
 
-          <ThemeToggleButton onClick={toggleThemeMode}>
-            {mode === "dark" ? <LightModeOutlinedIcon /> : <DarkModeOutlinedIcon />}
+          <ThemeToggleButton
+            onClick={toggleThemeMode}
+            aria-label="Toggle dark mode"
+          >
+            {mode === "dark" ? (
+              <LightModeOutlinedIcon />
+            ) : (
+              <DarkModeOutlinedIcon />
+            )}
           </ThemeToggleButton>
 
           <MobileMenuIcon
-            color="inherit"
-            aria-label="open drawer"
-            edge="end"
+            aria-label="Open navigation menu"
             onClick={handleDrawerToggle}
           >
             <MenuIcon />
           </MobileMenuIcon>
-          
         </AppStack>
 
         <Drawer

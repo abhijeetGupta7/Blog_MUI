@@ -1,14 +1,10 @@
 import React, { useRef, useEffect, useState } from "react";
-import IconButton from "@mui/material/IconButton";
-import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { BLOG_POSTS } from "../data/mockData";
 import { AppStack } from "./ui/layout";
 import { AppHeroCard } from "./ui/Card/AppHeroCard";
 import { AppTypography } from "./ui/Typography/AppTypography";
 import {
   CarouselHeader,
-  CarouselNavigation,
   CarouselTrack,
 } from "./ui/Carousel";
 import { AppChip } from "./ui/Chip/AppChip";
@@ -51,15 +47,8 @@ const MemoHeroCard = React.memo(HeroCard);
 export default function HeroCarousel() {
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  const scroll = (dir: "left" | "right") => {
-    scrollRef.current?.scrollBy({
-      left: dir === "right" ? 460 : -460,
-      behavior: "smooth",
-    });
-  };
-
   return (
-    <AppStack gap="lg" py={6}>
+    <AppStack gap="xs">
       {/* HEADER */}
       <CarouselHeader
         direction="row"
@@ -67,15 +56,6 @@ export default function HeroCarousel() {
         alignItems="center"
       >
         <AppTypography intent="headingLarge">Featured Blogs</AppTypography>
-
-        <CarouselNavigation>
-          <IconButton onClick={() => scroll("left")} aria-label="Scroll left">
-            <ArrowBackIosNewIcon />
-          </IconButton>
-          <IconButton onClick={() => scroll("right")} aria-label="Scroll right">
-            <ArrowForwardIosIcon />
-          </IconButton>
-        </CarouselNavigation>
       </CarouselHeader>
 
       {/* TRACK */}
