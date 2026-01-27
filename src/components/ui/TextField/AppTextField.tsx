@@ -24,22 +24,30 @@ const StyledTextField = styled(TextField)(({ theme }) => ({
   "& .MuiInputLabel-root": { fontWeight: 500 },
 }));
 
+const StyledInputAdornment = styled(InputAdornment)(({ theme }) => ({
+  color: theme.palette.action.active,
+}));
+
+const StartAdornment = styled(StyledInputAdornment)(({ theme }) => ({
+  marginRight: theme.spacing(1),
+}));
+
+const EndAdornment = styled(StyledInputAdornment)(({ theme }) => ({
+  marginLeft: theme.spacing(1),
+}));
+
 export const AppTextField = React.forwardRef<HTMLDivElement, AppTextFieldProps>(
   (props, ref) => {
     const { startIcon, endIcon, slotProps, InputProps, ...otherProps } = props;
 
     const startAdornment = startIcon ? (
-      <InputAdornment position="start" sx={{ color: "action.active", mr: 1 }}>
-        {startIcon}
-      </InputAdornment>
+      <StartAdornment position="start">{startIcon}</StartAdornment>
     ) : (
       InputProps?.startAdornment
     );
 
     const endAdornment = endIcon ? (
-      <InputAdornment position="end" sx={{ color: "action.active", ml: 1 }}>
-        {endIcon}
-      </InputAdornment>
+      <EndAdornment position="end">{endIcon}</EndAdornment>
     ) : (
       InputProps?.endAdornment
     );
@@ -48,11 +56,10 @@ export const AppTextField = React.forwardRef<HTMLDivElement, AppTextFieldProps>(
       <StyledTextField
         fullWidth
         variant="outlined"
-        {...otherProps} 
+        {...otherProps}
         ref={ref}
-        
         slotProps={{
-          ...slotProps, 
+          ...slotProps,
           input: {
             ...InputProps,
             ...slotProps?.input,

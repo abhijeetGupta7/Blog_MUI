@@ -1,22 +1,18 @@
 import React, { forwardRef } from "react";
-import { styled, alpha } from "@mui/material/styles";
-import Box from "@mui/material/Box";
 import { Link as RouterLink } from "react-router-dom";
-
-// Import our existing Primitives 
 import { AppCardRoot, type AppCardRootProps } from "./AppCardRoot";
 import { AppCardAction } from "./AppCardAction";
 import { AppCardMedia, AppCardMediaContainer } from "./AppCardMedia";
 import { AppCardContent } from "./AppCardContent";
 import { AppCardTitle } from "./AppCardTitle";
 import { AppCardDescription } from "./AppCardDescription";
+import { HeroOverlay, HeroTopContent } from "./index";
+import { styled } from "@mui/material/styles";
 
 // ----------------------------------------------------------------------
-// 1. STYLED OVERRIDES (The "Cover" Logic)
+// STYLED OVERRIDES (The "Cover" Logic)
 // ----------------------------------------------------------------------
 
-// A. Root: Handles the "Active" scaling state
-// We extend AppCardRootProps to add 'active'
 interface HeroRootProps extends AppCardRootProps {
   active?: boolean;
 }
@@ -24,19 +20,16 @@ interface HeroRootProps extends AppCardRootProps {
 const StyledRoot = styled(AppCardRoot, {
   shouldForwardProp: (prop) => prop !== "active",
 })<HeroRootProps>(({ theme, active }) => ({
-  // 1. Generic Layout (Can be overridden by sx if needed, but defaults are solid)
   minWidth: 300,
   height: 520,
   position: "relative",
-  overflow: "hidden", // Masks the zoom
-  scrollSnapAlign: "center", // Built-in support for carousels
+  overflow: "hidden",
+  scrollSnapAlign: "center",
 
-  // 2. The "Pop" Animation
-  // Note: We use the theme transitions we set up earlier!
   transform: active ? "scale(1)" : "scale(0.85)",
   opacity: active ? 1 : 0.5,
   transition: theme.transitions.create(["transform", "opacity"], {
-    duration: 600, // Slightly slower for dramatic effect
+    duration: 600,
     easing: "cubic-bezier(0.2, 0, 0, 1)",
   }),
 
@@ -45,46 +38,50 @@ const StyledRoot = styled(AppCardRoot, {
   },
 }));
 
-// B. Overlay: The Gradient
-const StyledOverlay = styled(Box)(({ theme }) => ({
-  position: "absolute",
-  inset: 0,
-  background: `linear-gradient(to top, ${alpha("#000", 0.85)} 0%, transparent 60%)`,
-  pointerEvents: "none", // Let clicks pass through
-  zIndex: 1,
-}));
+const StyledContent = styled(AppCardContent, {
+  shouldForwardProp: (prop) => prop !== "active",
+})<{ active?: boolean }>(({ theme, active }) => ({
+    position: "absolute",
+    bottom: 0,
+    width: "100%",
+    zIndex: 2,
+    color: theme.palette.common.white,
 
-// C. Content: Absolute Positioning
-// We extend AppCardContent to position it at the bottom
-const StyledContent = styled(AppCardContent)<{ active?: boolean }>(({ theme, active }) => ({
-  position: "absolute",
-  bottom: 0,
-  width: "100%",
-  zIndex: 2, // Above gradient
-  color: theme.palette.common.white, // Always white on dark overlay
+    transform: active ? "translateY(0)" : "translateY(20px)",
+    transition: theme.transitions.create("transform", {
+      duration: 500,
+      easing: "cubic-bezier(0.2, 0, 0, 1)",
+    }),
+  })
+);
 
-  // Slide Up Animation
-  transform: active ? "translateY(0)" : "translateY(20px)",
-  transition: theme.transitions.create("transform", {
-    duration: 500,
-    easing: "cubic-bezier(0.2, 0, 0, 1)",
-  }),
-}));
+const StyledDescription = styled(AppCardDescription, {
+  shouldForwardProp: (prop) => prop !== "active",
+})<{ active?: boolean }>(({ theme, active }) => ({
+    color: "rgba(255,255,255,0.85)",
 
-// D. Description: Collapse Logic
-const StyledDescription = styled(AppCardDescription)<{ active?: boolean }>(({ theme, active }) => ({
-  color: alpha(theme.palette.common.white, 0.85),
-  
-  // Collapse Animation
-  maxHeight: active ? 80 : 0,
-  opacity: active ? 1 : 0,
-  transition: theme.transitions.create(["opacity", "max-height"], {
-    duration: 300,
-  }),
-}));
+    maxHeight: active ? 80 : 0,
+    opacity: active ? 1 : 0,
+    transition: theme.transitions.create(["opacity", "max-height"], {
+      duration: 300,
+    }),
+  })
+);
+
+const StyledImage = styled(AppCardMedia, {
+  shouldForwardProp: (prop) => prop !== "active",
+})<{ active?: boolean }>(({ active }) => ({
+    transform: active ? "scale(1.15)" : "scale(1)",
+    transition: "transform 800ms cubic-bezier(0.2, 0, 0, 1)",
+  })
+);
+
+const StyledTitle = styled(AppCardTitle)({
+  lineHeight: 1.1,
+});
 
 // ----------------------------------------------------------------------
-// 2. THE COMPONENT (Generic & Reusable)
+// THE COMPONENT
 // ----------------------------------------------------------------------
 
 export interface AppHeroCardProps extends AppCardRootProps {
@@ -92,8 +89,8 @@ export interface AppHeroCardProps extends AppCardRootProps {
   title: string;
   description?: string;
   href: string;
-  active?: boolean; // Controls the animation
-  topContent?: React.ReactNode; // Slot for "Featured" chip, etc.
+  active?: boolean;
+  topContent?: React.ReactNode;
 }
 
 export const AppHeroCard = forwardRef<HTMLDivElement, AppHeroCardProps>(
@@ -101,29 +98,22 @@ export const AppHeroCard = forwardRef<HTMLDivElement, AppHeroCardProps>(
     return (
       <StyledRoot ref={ref} active={active} interactive={false} {...other}>
         <AppCardAction component={RouterLink} to={href}>
-          
           {/* IMAGE LAYER */}
           <AppCardMediaContainer height="100%">
-            <AppCardMedia
-              component="img"
+            <StyledImage
               image={image}
-              alt={title}
-              // Custom Zoom for Hero Variant
-              sx={{
-                transform: active ? "scale(1.15)" : "scale(1)",
-                transition: "transform 800ms cubic-bezier(0.2, 0, 0, 1)",
-              }}
+              active={active}
             />
-            <StyledOverlay />
+            <HeroOverlay />
           </AppCardMediaContainer>
 
           {/* CONTENT LAYER */}
           <StyledContent active={active}>
-            {topContent && <Box sx={{ mb: 2 }}>{topContent}</Box>}
+            {topContent && <HeroTopContent>{topContent}</HeroTopContent>}
 
-            <AppCardTitle intent="headingMedium" gutterBottom sx={{ lineHeight: 1.1 }}>
+            <StyledTitle intent="headingMedium" gutterBottom>
               {title}
-            </AppCardTitle>
+            </StyledTitle>
 
             {description && (
               <StyledDescription intent="bodyPrimary" active={active}>
@@ -131,7 +121,6 @@ export const AppHeroCard = forwardRef<HTMLDivElement, AppHeroCardProps>(
               </StyledDescription>
             )}
           </StyledContent>
-
         </AppCardAction>
       </StyledRoot>
     );

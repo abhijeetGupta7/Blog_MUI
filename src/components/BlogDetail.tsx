@@ -1,65 +1,70 @@
 import { useParams, useNavigate } from "react-router-dom";
-import Box from "@mui/material/Box";
 import { AppTypography } from "./ui/Typography/AppTypography";
-import Container from "@mui/material/Container";
+import { AppContainer } from "./ui/layout";
 import Chip from "@mui/material/Chip";
 import { AppStack } from "./ui/layout";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { BLOG_POSTS } from "../data/mockData";
 import { AppButton } from "./ui/Button/AppButton";
+import {
+  NotFoundContainer,
+  BlogImage,
+  BackButtonWrapper,
+} from "./ui/Blog";
+import { styled } from "@mui/material/styles";
+
+const BlogDetailContainer = styled(AppContainer)(({ theme }) => ({
+  paddingTop: theme.spacing(4),
+  paddingBottom: theme.spacing(4),
+}));
 
 export default function BlogDetail() {
-  const { id } = useParams(); 
+  const { id } = useParams();
   const navigate = useNavigate();
 
   const post = BLOG_POSTS.find((p) => p.id === Number(id));
 
   if (!post) {
     return (
-      // SEPARATED PAGE NOT FOUND AND POST NOT FOUND
-      <Container sx={{ py: 10, textAlign: "center"}}>
+      <NotFoundContainer>
         <AppTypography intent="headingMedium">Post not found</AppTypography>
-        <AppButton intent="primary" onClick={() => navigate("/")} sx={{mt:2}}>
-          Go Home
-        </AppButton> 
-      </Container>
+        <AppStack gap="sm" alignItems="center" mt={2}>
+          <AppButton intent="primary" onClick={() => navigate("/")}>
+            Go Home
+          </AppButton>
+        </AppStack>
+      </NotFoundContainer>
     );
   }
 
   return (
-    <Container maxWidth="md" sx={{ py: 4 }}>
-  
+    <BlogDetailContainer maxWidth="md">
       {/* Back Button */}
-      <AppButton 
-        intent="text"
-        startIcon={<ArrowBackIcon />} 
-        onClick={() => navigate(-1)}
-        sx={{ mb: 4 }}  // whereever in visual compoenent like button typography etc such sx are there it should not be used, bcz button has its style that's enough, these margin, spacing stuffs should be handled by layout components 
-      >
-        Back
-      </AppButton>
+      <BackButtonWrapper>
+        <AppButton
+          intent="text"
+          startIcon={<ArrowBackIcon />}
+          onClick={() => navigate(-1)}
+        >
+          Back
+        </AppButton>
+      </BackButtonWrapper>
 
-      {/* my blog POST */}
+      {/* Blog Image */}
       {post.image && (
-        <Box
+        <BlogImage
           component="img"
           src={post.image}
           alt={post.title}
           loading="eager"
-          sx={{
-            width: "100%",
-            height: "400px",
-            objectFit: "cover",
-            borderRadius: 4,
-            mb: 4,
-            boxShadow: 3
-          }}
         />
       )}
 
       {/* Title & Meta */}
-      <AppTypography intent="headingLarge" component="h1" gutterBottom>{post.title}</AppTypography>
-      
+      <AppTypography intent="headingLarge" component="h1" gutterBottom>
+        {post.title}
+      </AppTypography>
+
       <AppStack direction="row" gap="xs">
         <Chip label="React" size="small" />
         <Chip label="Tech" size="small" />
@@ -67,9 +72,7 @@ export default function BlogDetail() {
       </AppStack>
 
       {/* Content Body */}
-      <AppTypography intent="bodyPrimary">
-        {post.description}
-      </AppTypography>
-    </Container>
+      <AppTypography intent="bodyPrimary">{post.description}</AppTypography>
+    </BlogDetailContainer>
   );
 }

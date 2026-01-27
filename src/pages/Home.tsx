@@ -1,5 +1,4 @@
 import React, { useMemo, lazy } from "react";
-import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import { AppTypography } from "../components/ui/Typography/AppTypography";
 import AppCard from "../components/AppCard";
@@ -8,6 +7,8 @@ import PageLoader from "../components/PageLoader";
 import { BLOG_POSTS } from "../data/mockData";
 import { Link as RouterLink } from "react-router-dom";
 import { AppButton } from "../components/ui/Button/AppButton";
+import { AppStack } from "../components/ui/layout";
+import { SectionHeader, SectionTitle } from "../components/ui/Home";
 
 export default function Home() {
   const cards = useMemo(
@@ -31,26 +32,25 @@ export default function Home() {
         <BlogCarousel />
       </React.Suspense>
 
-      <Box>
-        <Box>
-          <Box>
+      <AppStack gap="lg">
+        <SectionHeader>
+          <SectionTitle>
             <AppTypography intent="headingLarge">Recent Blogs</AppTypography>
+            <AppTypography intent="bodySecondary">
+              Latest thoughts from the community
+            </AppTypography>
+          </SectionTitle>
 
-              <AppTypography intent="bodySecondary">Latest thoughts from the community</AppTypography>
-          </Box>
-
-          <AppButton
-            component={RouterLink}
-            to="/blogs"
-            intent="text"
-          >
+        
+          <AppButton component={RouterLink} to="/blogs" intent="text">
             View all
           </AppButton>
-          
-        </Box>
+        </SectionHeader>
 
-        <Grid container spacing={4}>{cards}</Grid>
-      </Box>
+        <Grid container spacing={4}>
+          {cards}
+        </Grid>
+      </AppStack>
     </>
   );
 }

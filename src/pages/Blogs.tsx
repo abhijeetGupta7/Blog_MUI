@@ -2,7 +2,6 @@ import { useMemo, useState } from "react";
 import { AppStack } from "../components/ui/layout";
 import Grid from "@mui/material/Grid";
 import { AppTypography } from "../components/ui/Typography/AppTypography";
-import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import Chip from "@mui/material/Chip";
 import Divider from "@mui/material/Divider";
@@ -10,26 +9,15 @@ import SearchIcon from "@mui/icons-material/Search";
 import AppCard from "../components/AppCard";
 import { BLOG_POSTS } from "../data/mockData";
 import { AppTextField } from "../components/ui/TextField/AppTextField";
-
-/* -------------------------------------------------------------------------- */
-/* CONFIG */
-/* -------------------------------------------------------------------------- */
+import { SelectWrapper } from "../components/ui/Form";
 
 const TAGS = ["React", "MUI", "Design", "Performance", "Tutorial"];
 type SortOption = "latest" | "oldest";
-
-/* -------------------------------------------------------------------------- */
-/* PAGE */
-/* -------------------------------------------------------------------------- */
 
 export default function Blogs() {
   const [search, setSearch] = useState("");
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
   const [sort, setSort] = useState<SortOption>("latest");
-
-  /* ---------------------------------------------------------------------- */
-  /* FILTER + SORT LOGIC (mock for now, API later) */
-  /* ---------------------------------------------------------------------- */
 
   const filteredPosts = useMemo(() => {
     let posts = [...BLOG_POSTS];
@@ -68,40 +56,34 @@ export default function Blogs() {
     [filteredPosts]
   );
 
-  /* ---------------------------------------------------------------------- */
-  /* UI */
-  /* ---------------------------------------------------------------------- */
-
   return (
     <AppStack gap="lg">
       {/* PAGE HEADER */}
       <AppStack gap="xs">
         <AppTypography intent="headingLarge">All Blogs</AppTypography>
-        <AppTypography intent="bodyPrimary">Browse, search, and explore all published articles</AppTypography>
+        <AppTypography intent="bodyPrimary">
+          Browse, search, and explore all published articles
+        </AppTypography>
       </AppStack>
 
       {/* FILTER BAR */}
-      <AppStack
-        direction={{ xs: "column", md: "row" }}
-        gap="sm"
-      >
+      <AppStack direction={{ xs: "column", md: "row" }} gap="sm">
         {/* SEARCH */}
         <AppTextField
           placeholder="Search blogs…"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          startIcon={<SearchIcon />} 
+          startIcon={<SearchIcon />}
         />
 
         {/* SORT */}
-        <Select
+        <SelectWrapper
           value={sort}
           onChange={(e) => setSort(e.target.value as SortOption)}
-          sx={{ minWidth: 160 }}
         >
           <MenuItem value="latest">Latest</MenuItem>
           <MenuItem value="oldest">Oldest</MenuItem>
-        </Select>
+        </SelectWrapper>
       </AppStack>
 
       {/* TAG FILTER */}
@@ -126,7 +108,9 @@ export default function Blogs() {
       <Divider />
 
       {/* BLOG GRID */}
-      <Grid container spacing={4}>{postCards}</Grid>
+      <Grid container spacing={4}>
+        {postCards}
+      </Grid>
 
       {/* EMPTY STATE */}
       {filteredPosts.length === 0 && (

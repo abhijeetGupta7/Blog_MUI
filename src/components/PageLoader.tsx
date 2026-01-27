@@ -1,16 +1,11 @@
-import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
+import { CenteredLoader } from "./ui/Loading";
 
 const PageLoader = () => {
   return (
-    <Box
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-      minHeight="60vh"
-    >
+    <CenteredLoader>
       <CircularProgress />
-    </Box>
+    </CenteredLoader>
   );
 };
 

@@ -1,0 +1,1 @@
+export { FeaturedChip } from "./FeaturedChip";

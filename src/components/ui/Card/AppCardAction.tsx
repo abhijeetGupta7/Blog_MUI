@@ -6,7 +6,7 @@ import { styled } from "@mui/material/styles";
  * - Removes the focus highlight
  * - Provides hover selector to scale child media (.MuiCardMedia-img)
  */
-export const AppCardAction = styled(CardActionArea)<CardActionAreaProps>(({ theme }) => ({
+export const AppCardAction = styled(CardActionArea)<CardActionAreaProps>(() => ({
   height: "100%", // Ensure it fills the card
   display: "flex",
   flexDirection: "column",

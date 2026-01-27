@@ -8,7 +8,7 @@ interface AppCardTitleProps extends AppTypographyProps {
 
 export const AppCardTitle = styled(AppTypography, {
   shouldForwardProp: (prop) => prop !== "clamp",
-})<AppCardTitleProps>(({ theme, clamp = 2 }) => ({
+})<AppCardTitleProps>(({ clamp = 2 }) => ({
   display: "-webkit-box",
   overflow: "hidden",
   WebkitBoxOrient: "vertical",

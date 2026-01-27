@@ -1,25 +1,19 @@
-import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
 import { AppTypography } from "../../components/ui/Typography/AppTypography";
 import React from "react";
+import { AuthFormCard, AuthFormContent } from "../../components/ui/Form";
 
 type AuthFormWrapperProps = {
   title: string;
   children: React.ReactNode;
 };
 
-function AuthFormWrapper({
-  title,
-  children,
-}: AuthFormWrapperProps) {
+function AuthFormWrapper({ title, children }: AuthFormWrapperProps) {
   return (
-    <Paper elevation={2} sx={{ p: 4 }}>
+    <AuthFormCard intent="base" elevation={2}>
       <AppTypography intent="headingMedium">{title}</AppTypography>
-      
-      <Box sx={{ mt: 2 }}>
-        {children}
-      </Box>
-    </Paper>
+
+      <AuthFormContent>{children}</AuthFormContent>
+    </AuthFormCard>
   );
 }
 

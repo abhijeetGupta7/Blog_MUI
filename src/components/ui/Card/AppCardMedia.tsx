@@ -1,27 +1,25 @@
 import CardMedia, { type CardMediaProps } from "@mui/material/CardMedia";
-import Box, { type BoxProps } from "@mui/material/Box";
 import { styled } from "@mui/material/styles";
+import { AppBox } from "../layout/AppBox";
 
-// 1. Rename to "Container" and extend Box for flexibility (sx, height, etc.)
-export const AppCardMediaContainer = styled(Box)<BoxProps>({
+// 1. Container - extends AppBox for flexibility
+export const AppCardMediaContainer = styled(AppBox)({
   overflow: "hidden",
   width: "100%",
   flexShrink: 0,
-  position: "relative", // Allows absolute positioning of badges inside if needed
+  position: "relative",
 });
 
 // 2. The Media Component
 export const AppCardMedia = styled(CardMedia)<CardMediaProps>(({ theme }) => ({
   width: "100%",
   objectFit: "cover",
-  display: "block", // Removes the tiny 4px gap under images
-  
-  // Theme-aware transition matching AppCardRoot
+  display: "block",
+
   transition: theme.transitions.create("transform", {
-    duration: theme.transitions.duration.standard, // ~300ms (slightly slower for smooth zoom)
+    duration: theme.transitions.duration.standard,
   }),
-  
-  // Target the inner <img> if MUI renders one
+
   "&.MuiCardMedia-root, & .MuiCardMedia-img": {
     width: "100%",
     height: "100%",

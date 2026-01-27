@@ -1,17 +1,33 @@
 import { useCallback, useMemo, useState } from "react";
-import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
-import { AppStack } from "../components/ui/layout";
+import { styled } from "@mui/material/styles";
+import { AppBox } from "../components/ui/layout/AppBox";
+import { AppStack } from "../components/ui/layout/AppStack";
 import { AppTypography } from "../components/ui/Typography/AppTypography";
 import Autocomplete from "@mui/material/Autocomplete";
 import Chip from "@mui/material/Chip";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
-import Divider from "@mui/material/Divider";
 import PhotoCameraOutlinedIcon from "@mui/icons-material/PhotoCameraOutlined";
 import { useNavigate } from "react-router-dom";
 import { AppButton } from "../components/ui/Button/AppButton";
 import { AppTextField } from "../components/ui/TextField/AppTextField";
+import { PageCenteringWrapper, PageCard, SectionDivider } from "../components/ui/Page";
+import { UploadPlaceholder, ImagePreview } from "../components/ui/Form";
+
+// ----------------------------------------------------------------------
+// STYLED COMPONENTS (Page-specific overrides)
+// ----------------------------------------------------------------------
+
+const CreatePostCard = styled(PageCard)(({ theme }) => ({
+  padding: theme.spacing(2.5),
+  [theme.breakpoints.up("md")]: {
+    padding: theme.spacing(4),
+  },
+}));
+
+// ----------------------------------------------------------------------
+// CONSTANTS
+// ----------------------------------------------------------------------
 
 const TAG_OPTIONS = [
   "React",
@@ -22,6 +38,10 @@ const TAG_OPTIONS = [
   "Tutorial",
   "Performance",
 ];
+
+// ----------------------------------------------------------------------
+// COMPONENT
+// ----------------------------------------------------------------------
 
 export default function CreatePost() {
   const navigate = useNavigate();
@@ -85,58 +105,28 @@ export default function CreatePost() {
 
   return (
     <>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          px: 2,
-          py: 6,
-        }}
-      >
-        <Paper
-          elevation={2}
-          sx={{
-            width: "100%",
-            maxWidth: 900,
-            p: { xs: 2.5, md: 4 },
-          }}
-        >
+      <PageCenteringWrapper>
+        <CreatePostCard intent="base" elevation={2} maxWidth={900}>
           {/* Header */}
           <AppTypography intent="headingMedium">Create New Post</AppTypography>
 
           <AppTypography intent="bodySecondary">Share your thoughts with the community</AppTypography>
 
-          <Divider sx={{ my: 3 }} />
+          <SectionDivider />
 
           {/* Form */}
-          <Box component="form" onSubmit={handleSubmit}>
+          <AppBox component="form" onSubmit={handleSubmit}>
             <AppStack gap="md">
               {/* Image Upload */}
               <AppStack gap="xs">
                 <AppTypography intent="headingSmall">Cover image</AppTypography>
 
-                <Box
-                  sx={{
-                    border: "1px dashed",
-                    borderColor: "divider",
-                    borderRadius: 2,
-                    p: 2,
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 2,
-                  }}
-                >
+                <UploadPlaceholder>
                   {imagePreview && (
-                    <Box
+                    <ImagePreview
                       component="img"
                       src={imagePreview}
                       alt="Preview"
-                      sx={{
-                        width: 140,
-                        height: 90,
-                        objectFit: "cover",
-                        borderRadius: 1,
-                      }}
                     />
                   )}
 
@@ -148,7 +138,7 @@ export default function CreatePost() {
                     Upload image
                     <input hidden type="file" accept="image/*" onChange={handleImageChange} />
                   </AppButton>
-                </Box>
+                </UploadPlaceholder>
               </AppStack>
 
               {/* Title */}
@@ -204,9 +194,9 @@ export default function CreatePost() {
                 </AppButton>
               </AppStack>
             </AppStack>
-          </Box>
-        </Paper>
-      </Box>
+          </AppBox>
+        </CreatePostCard>
+      </PageCenteringWrapper>
 
       {/* Feedback */}
       <Snackbar

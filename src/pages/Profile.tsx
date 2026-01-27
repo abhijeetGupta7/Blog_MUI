@@ -1,10 +1,6 @@
 import { useState } from "react";
-import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
+import { AppBox, AppStack } from "../components/ui/layout";
 import { AppTypography } from "../components/ui/Typography/AppTypography";
-import { AppStack } from "../components/ui/layout";
-import Avatar from "@mui/material/Avatar";
-import Divider from "@mui/material/Divider";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import Snackbar from "@mui/material/Snackbar";
@@ -13,7 +9,8 @@ import PhotoCameraOutlinedIcon from "@mui/icons-material/PhotoCameraOutlined";
 import { MOCK_USER } from "../data/mockUser";
 import { AppButton } from "../components/ui/Button/AppButton";
 import { AppTextField } from "../components/ui/TextField/AppTextField";
-
+import { PageCenteringWrapper, PageCard, SectionDivider } from "../components/ui/Page";
+import { LargeAvatar } from "../components/ui/Avatar";
 
 export default function Profile() {
   const [username, setUsername] = useState(MOCK_USER.username);
@@ -42,20 +39,19 @@ export default function Profile() {
 
   return (
     <>
-      <Box sx={{ display: "flex", justifyContent: "center", py: 6, px: 2 }}>
-        <Paper sx={{ width: "100%", maxWidth: 720, p: 4 }} elevation={2}>
+      <PageCenteringWrapper>
+        <PageCard intent="base" elevation={2} maxWidth={720}>
           <AppTypography intent="headingMedium">Profile</AppTypography>
           <AppTypography intent="bodySecondary">Manage your account information</AppTypography>
 
-          <Divider sx={{ my: 3 }} />
+          <SectionDivider />
 
-          <Box component="form" onSubmit={handleSave}>
+          <AppBox component="form" onSubmit={handleSave}>
             <AppStack gap="md">
               {/* Avatar */}
               <AppStack direction="row" gap="md" alignItems="center">
-                <Avatar
+                <LargeAvatar
                   src={avatarPreview ?? undefined}
-                  sx={{ width: 96, height: 96 }}
                 />
 
                 <AppButton
@@ -115,9 +111,9 @@ export default function Profile() {
                 
               </AppStack>
             </AppStack>
-          </Box>
-        </Paper>
-      </Box>
+          </AppBox>
+        </PageCard>
+      </PageCenteringWrapper>
 
       <Snackbar
         open={openSnack}
