@@ -2,12 +2,12 @@ import React from "react";
 import { AppStack } from "../../components/ui/layout";
 import Link from "@mui/material/Link";
 import AuthFormWrapper from "./AuthFormWrapper";
-import Divider from "@mui/material/Divider";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import { AppTypography } from "../../components/ui/Typography/AppTypography";
 import { AppButton } from "../../components/ui/Button/AppButton";
 import { AppTextField } from "../../components/ui/TextField/AppTextField";
+import { AppDivider } from "../../components/ui/Divider/AppDivider";
 
 function SignIn() {
   return (
@@ -34,9 +34,9 @@ function SignIn() {
 
         <AppButton intent="primary"> Sign In </AppButton>
 
-        <Divider>
+        <AppDivider>
           <AppTypography intent="caption">or</AppTypography>
-        </Divider>
+        </AppDivider>
 
         <AppStack alignItems="center" gap="xs">
           <AppTypography intent="bodySecondary">

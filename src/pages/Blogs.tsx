@@ -1,63 +1,66 @@
 import { useMemo, useState } from "react";
+import SearchIcon from "@mui/icons-material/Search";
+import MenuItem from "@mui/material/MenuItem";
+
 import { AppStack, AppGrid } from "../components/ui/layout";
 import { AppTypography } from "../components/ui/Typography/AppTypography";
-import MenuItem from "@mui/material/MenuItem";
-import Chip from "@mui/material/Chip";
-import Divider from "@mui/material/Divider";
-import SearchIcon from "@mui/icons-material/Search";
-import AppCard from "../components/AppCard";
-import { BLOG_POSTS } from "../data/mockData";
 import { AppTextField } from "../components/ui/TextField/AppTextField";
+import { AppDivider } from "../components/ui/Divider/AppDivider";
+import { AppChip } from "../components/ui/Chip/AppChip";
 import { SelectWrapper } from "../components/ui/Form";
 
-const TAGS = ["React", "MUI", "Design", "Performance", "Tutorial"];
+import AppCard from "../components/AppCard";
+import { BLOG_POSTS } from "../data/mockData";
+
+const TAGS = ["React", "MUI", "Design", "Performance", "Tutorial"] as const;
 type SortOption = "latest" | "oldest";
 
+type BlogFilters = {
+  search: string;
+  tag: string | null;
+  sort: SortOption;
+};
+
+const DEFAULT_FILTERS: BlogFilters = {
+  search: "",
+  tag: null,
+  sort: "latest",
+};
+
 export default function Blogs() {
-  const [search, setSearch] = useState("");
-  const [selectedTag, setSelectedTag] = useState<string | null>(null);
-  const [sort, setSort] = useState<SortOption>("latest");
+  const [filters, setFilters] = useState<BlogFilters>(DEFAULT_FILTERS);
+
+  const updateFilters = (patch: Partial<BlogFilters>) => {
+    setFilters((prev) => ({ ...prev, ...patch }));
+  };
 
   const filteredPosts = useMemo(() => {
-    let posts = [...BLOG_POSTS];
+    if (!Array.isArray(BLOG_POSTS)) return [];
 
-    if (search) {
+    let posts = BLOG_POSTS;
+
+    if (filters.search.trim()) {
+      const query = filters.search.toLowerCase();
       posts = posts.filter((p) =>
-        p.title.toLowerCase().includes(search.toLowerCase())
+        p.title.toLowerCase().includes(query)
       );
     }
 
-    if (selectedTag) {
+    if (filters.tag) {
+      const tag = filters.tag.toLowerCase();
       posts = posts.filter((p) =>
-        p.title.toLowerCase().includes(selectedTag.toLowerCase())
+        p.title.toLowerCase().includes(tag)
       );
     }
 
-    posts.sort((a, b) =>
-      sort === "latest" ? b.id - a.id : a.id - b.id
+    return [...posts].sort((a, b) =>
+      filters.sort === "latest" ? b.id - a.id : a.id - b.id
     );
-
-    return posts;
-  }, [search, selectedTag, sort]);
-
-  const postCards = useMemo(
-    () =>
-      filteredPosts.map((post) => (
-        <AppGrid key={post.id} size={{ xs: 12, sm: 6, md: 4 }}>
-          <AppCard
-            title={post.title}
-            description={post.description}
-            image={post.image}
-            href={`/blog/${post.id}`}
-          />
-        </AppGrid>
-      )),
-    [filteredPosts]
-  );
+  }, [filters]);
 
   return (
     <AppStack gap="lg">
-      {/* PAGE HEADER */}
+      {/* HEADER */}
       <AppStack gap="xs">
         <AppTypography intent="headingLarge">All Blogs</AppTypography>
         <AppTypography intent="bodyPrimary">
@@ -67,18 +70,20 @@ export default function Blogs() {
 
       {/* FILTER BAR */}
       <AppStack direction={{ xs: "column", md: "row" }} gap="sm">
-        {/* SEARCH */}
         <AppTextField
           placeholder="Search blogs…"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          value={filters.search}
+          onChange={(e) =>
+            updateFilters({ search: e.target.value ?? "" })
+          }
           startIcon={<SearchIcon />}
         />
 
-        {/* SORT */}
         <SelectWrapper
-          value={sort}
-          onChange={(e) => setSort(e.target.value as SortOption)}
+          value={filters.sort}
+          onChange={(e) =>
+            updateFilters({ sort: e.target.value as SortOption })
+          }
         >
           <MenuItem value="latest">Latest</MenuItem>
           <MenuItem value="oldest">Oldest</MenuItem>
@@ -87,34 +92,46 @@ export default function Blogs() {
 
       {/* TAG FILTER */}
       <AppStack direction="row" gap="xs" flexWrap="wrap">
-        <Chip
+        <AppChip
           label="All"
           clickable
-          color={!selectedTag ? "primary" : "default"}
-          onClick={() => setSelectedTag(null)}
+          color={!filters.tag ? "primary" : "default"}
+          onClick={() => updateFilters({ tag: null })}
         />
+
         {TAGS.map((tag) => (
-          <Chip
+          <AppChip
             key={tag}
             label={tag}
             clickable
-            color={selectedTag === tag ? "primary" : "default"}
-            onClick={() => setSelectedTag(tag)}
+            color={filters.tag === tag ? "primary" : "default"}
+            onClick={() => updateFilters({ tag })}
           />
         ))}
       </AppStack>
 
-      <Divider />
+      <AppDivider />
 
       {/* BLOG GRID */}
       <AppGrid container spacing={4}>
-        {postCards}
+        {filteredPosts.map((post) => (
+          <AppGrid key={post.id} size={{ xs: 12, sm: 6, md: 4 }}>
+            <AppCard
+              title={post.title}
+              description={post.description}
+              image={post.image}
+              href={`/blog/${post.id}`}
+            />
+          </AppGrid>
+        ))}
       </AppGrid>
 
       {/* EMPTY STATE */}
       {filteredPosts.length === 0 && (
         <AppStack alignItems="center" gap="xl">
-          <AppTypography intent="bodySecondary">No blogs found.</AppTypography>
+          <AppTypography intent="bodySecondary">
+            No blogs found.
+          </AppTypography>
         </AppStack>
       )}
     </AppStack>

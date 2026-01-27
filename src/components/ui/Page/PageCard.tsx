@@ -18,3 +18,12 @@ export const PageCard = styled(AppPaper, {
 }));
 
 PageCard.displayName = "PageCard";
+
+export const CreatePostCard = styled(PageCard)(({ theme }) => ({
+  padding: theme.spacing(2.5),
+  [theme.breakpoints.up("md")]: {
+    padding: theme.spacing(4),
+  },
+}));
+
+CreatePostCard.displayName = "CreatePostCard";

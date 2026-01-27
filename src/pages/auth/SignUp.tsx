@@ -3,12 +3,12 @@ import { AppStack } from "../../components/ui/layout";
 import Link from "@mui/material/Link";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import AuthFormWrapper from "./AuthFormWrapper";
-import Divider from "@mui/material/Divider";
 import { AppTypography } from "../../components/ui/Typography/AppTypography";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import { AppButton } from "../../components/ui/Button/AppButton";
 import { AppTextField } from "../../components/ui/TextField/AppTextField";
+import { AppDivider } from "../../components/ui/Divider/AppDivider";
 
 function SignUp() {
   return (
@@ -37,9 +37,9 @@ function SignUp() {
 
         <AppButton intent="primary">Create Account</AppButton>
 
-        <Divider>
+        <AppDivider>
           <AppTypography intent="caption">or</AppTypography>
-        </Divider>
+        </AppDivider>
 
         {/* Secondary action */}
         <AppStack alignItems="center" gap="xs">

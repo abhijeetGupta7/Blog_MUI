@@ -1,29 +1,25 @@
 import { useCallback, useMemo, useState } from "react";
-import { styled } from "@mui/material/styles";
-import { AppBox } from "../components/ui/layout/AppBox";
-import { AppStack } from "../components/ui/layout/AppStack";
-import { AppTypography } from "../components/ui/Typography/AppTypography";
 import Autocomplete from "@mui/material/Autocomplete";
 import Chip from "@mui/material/Chip";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import PhotoCameraOutlinedIcon from "@mui/icons-material/PhotoCameraOutlined";
 import { useNavigate } from "react-router-dom";
+
+import { AppBox } from "../components/ui/layout/AppBox";
+import { AppStack } from "../components/ui/layout/AppStack";
+import { AppTypography } from "../components/ui/Typography/AppTypography";
 import { AppButton } from "../components/ui/Button/AppButton";
 import { AppTextField } from "../components/ui/TextField/AppTextField";
 import {
   PageCenteringWrapper,
-  PageCard,
+  CreatePostCard,
   SectionDivider,
 } from "../components/ui/Page";
 import { UploadPlaceholder, ImagePreview } from "../components/ui/Form";
 
-const CreatePostCard = styled(PageCard)(({ theme }) => ({
-  padding: theme.spacing(2.5),
-  [theme.breakpoints.up("md")]: {
-    padding: theme.spacing(4),
-  },
-}));
+// `CreatePostCard` moved to `components/ui/Page/PageCard.tsx` and exported
+// via `components/ui/Page/index.ts`
 
 const TAG_OPTIONS = [
   "React",
@@ -33,23 +29,32 @@ const TAG_OPTIONS = [
   "Design",
   "Tutorial",
   "Performance",
-];
+] as const;
 
-const INITIAL_FORM = {
+type CreatePostForm = {
+  title: string;
+  description: string;
+  tags: string[];
+  imagePreview: string | null;
+};
+
+const INITIAL_FORM: CreatePostForm = {
   title: "",
   description: "",
-  tags: [] as string[],
-  imagePreview: null as string | null,
+  tags: [],
+  imagePreview: null,
 };
 
 export default function CreatePost() {
   const navigate = useNavigate();
-
-  // Bundled form state
-  const [form, setForm] = useState(INITIAL_FORM);
+  const [form, setForm] = useState<CreatePostForm>(INITIAL_FORM);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
 
   const tagOptions = useMemo(() => TAG_OPTIONS, []);
+
+  const updateForm = useCallback((patch: Partial<CreatePostForm>) => {
+    setForm((prev) => ({ ...prev, ...patch }));
+  }, []);
 
   const handleImageChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -58,10 +63,10 @@ export default function CreatePost() {
 
       const reader = new FileReader();
       reader.onload = () =>
-        setForm((prev) => ({ ...prev, imagePreview: String(reader.result) }));
+        updateForm({ imagePreview: String(reader.result ?? null) });
       reader.readAsDataURL(file);
     },
-    []
+    [updateForm]
   );
 
   const resetForm = useCallback(() => {
@@ -72,20 +77,30 @@ export default function CreatePost() {
     (e: React.FormEvent) => {
       e.preventDefault();
 
-      const createdPost = {
+      const title = form.title.trim();
+      const description = form.description.trim();
+      if (!title || !description) return;
+
+      const newPost = {
         id: Date.now(),
-        title: form.title.trim(),
-        description: form.description.trim(),
+        title,
+        description,
         tags: form.tags,
         image: form.imagePreview,
         createdAt: new Date().toISOString(),
       };
 
-      const raw = localStorage.getItem("created_posts");
-      const existing = raw ? JSON.parse(raw) : [];
+      let existing: unknown[] = [];
+      try {
+        const raw = localStorage.getItem("created_posts");
+        existing = raw ? JSON.parse(raw) : [];
+      } catch {
+        console.log("Not created");
+      }
+
       localStorage.setItem(
         "created_posts",
-        JSON.stringify([createdPost, ...existing])
+        JSON.stringify([newPost, ...existing])
       );
 
       setSnackbarOpen(true);
@@ -102,7 +117,9 @@ export default function CreatePost() {
     <>
       <PageCenteringWrapper>
         <CreatePostCard intent="base" elevation={2} maxWidth={900}>
-          <AppTypography intent="headingMedium">Create New Post</AppTypography>
+          <AppTypography intent="headingMedium">
+            Create New Post
+          </AppTypography>
           <AppTypography intent="bodySecondary">
             Share your thoughts with the community
           </AppTypography>
@@ -111,9 +128,10 @@ export default function CreatePost() {
 
           <AppBox component="form" onSubmit={handleSubmit}>
             <AppStack gap="md">
-              {/* Image Upload */}
               <AppStack gap="xs">
-                <AppTypography intent="headingSmall">Cover image</AppTypography>
+                <AppTypography intent="headingSmall">
+                  Cover image
+                </AppTypography>
 
                 <UploadPlaceholder>
                   {form.imagePreview && (
@@ -140,23 +158,21 @@ export default function CreatePost() {
                 </UploadPlaceholder>
               </AppStack>
 
-              {/* Title */}
               <AppTextField
                 label="Title"
                 value={form.title}
                 onChange={(e) =>
-                  setForm((prev) => ({ ...prev, title: e.target.value }))
+                  updateForm({ title: e.target.value ?? "" })
                 }
                 required
               />
 
-              {/* Tags */}
               <Autocomplete
                 multiple
                 options={tagOptions}
                 value={form.tags}
-                onChange={(_, val) =>
-                  setForm((prev) => ({ ...prev, tags: val }))
+                onChange={(_, value) =>
+                  updateForm({ tags: value ?? [] })
                 }
                 renderTags={(value, getTagProps) =>
                   value.map((option, index) => (
@@ -176,18 +192,16 @@ export default function CreatePost() {
                 )}
               />
 
-              {/* Description */}
               <AppTextField
                 label="Description"
                 value={form.description}
                 onChange={(e) =>
-                  setForm((prev) => ({ ...prev, description: e.target.value }))
+                  updateForm({ description: e.target.value ?? "" })
                 }
                 multiline
                 minRows={6}
               />
 
-              {/* Actions */}
               <AppStack direction="row" gap="sm" justifyContent="flex-end">
                 <AppButton intent="text" onClick={resetForm}>
                   Reset
