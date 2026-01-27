@@ -15,17 +15,17 @@ const AppThemeProvider = ({ children }: AppThemeProviderProps) => {
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 
   // If theme mode already stored, use that otherwise use system mode
-  const getInitialMode = () => {
+  const [mode, setMode] = useState<"light" | "dark">(() => {
     const storedMode = localStorage.getItem(THEME_STORAGE_KEY);
 
     if (storedMode === "light" || storedMode === "dark") {
       return storedMode;
     }
 
-    return prefersDarkMode ? "dark" : "light";
-  };
-
-  const [mode, setMode] = useState<"light" | "dark">(getInitialMode);
+    const systemMode = prefersDarkMode ? "dark" : "light";
+    localStorage.setItem(THEME_STORAGE_KEY, systemMode);
+    return systemMode;
+  });
 
   const colorMode = useMemo(
     () => ({
@@ -41,7 +41,6 @@ const AppThemeProvider = ({ children }: AppThemeProviderProps) => {
     [mode]
   );
 
-  // NEWER VERSIONS ALSO USE COLOR SCHEME, instead of creating complete theme object, as mode changes
   const theme = useMemo(() => createAppTheme(mode), [mode]);
 
   return (
