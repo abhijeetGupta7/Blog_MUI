@@ -1,6 +1,5 @@
 import { useCallback, useMemo, useState } from "react";
 import Autocomplete from "@mui/material/Autocomplete";
-import Chip from "@mui/material/Chip";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import PhotoCameraOutlinedIcon from "@mui/icons-material/PhotoCameraOutlined";
@@ -17,9 +16,7 @@ import {
   SectionDivider,
 } from "../components/ui/Page";
 import { UploadPlaceholder, ImagePreview } from "../components/ui/Form";
-
-// `CreatePostCard` moved to `components/ui/Page/PageCard.tsx` and exported
-// via `components/ui/Page/index.ts`
+import { AppChip } from "../components/ui/Chip/AppChip";
 
 const TAG_OPTIONS = [
   "React",
@@ -175,7 +172,7 @@ export default function CreatePost() {
                 }
                 renderTags={(value, getTagProps) =>
                   value.map((option, index) => (
-                    <Chip
+                    <AppChip
                       label={option}
                       {...getTagProps({ index })}
                       key={option}
