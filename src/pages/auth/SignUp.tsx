@@ -1,6 +1,5 @@
 import React from "react";
 import { AppStack } from "../../components/ui/layout";
-import Link from "@mui/material/Link";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import AuthFormWrapper from "./AuthFormWrapper";
 import { AppTypography } from "../../components/ui/Typography/AppTypography";
@@ -9,6 +8,7 @@ import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import { AppButton } from "../../components/ui/Button/AppButton";
 import { AppTextField } from "../../components/ui/TextField/AppTextField";
 import { AppDivider } from "../../components/ui/Divider/AppDivider";
+import { AppLink } from "../../components/ui/Link/AppLink";
 
 function SignUp() {
   return (
@@ -46,10 +46,9 @@ function SignUp() {
           <AppTypography intent="bodySecondary">
             Already have an account?
           </AppTypography>
-          {/* MUI LINK tag is normal <a> tag, so must wrap it inside react router dom */}
-          <Link href="/signin" underline="hover">
-            Sign in instead
-          </Link>
+      
+          <AppLink to="/signin"> Sign in instead </AppLink>
+          
         </AppStack>
       </AppStack>
     </AuthFormWrapper>

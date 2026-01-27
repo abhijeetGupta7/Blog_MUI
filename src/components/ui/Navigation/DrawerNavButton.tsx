@@ -1,10 +1,8 @@
+// DrawerNavButton.tsx
 import { styled } from "@mui/material/styles";
-import { AppButton } from "../Button/AppButton";
+import { AppNavLinkButton } from "../Link/AppNavLinkButton";
 
-/**
- * DrawerNavButton - left-aligned nav button used inside drawers
- */
-export const DrawerNavButton = styled(AppButton)(() => ({
+export const DrawerNavButton = styled(AppNavLinkButton)(() => ({
   justifyContent: "flex-start",
 }));
 

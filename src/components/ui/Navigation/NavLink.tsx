@@ -1,15 +1,17 @@
-import { styled } from "@mui/material/styles";
+import { AppNavLinkButton } from "../Link/AppNavLinkButton";
 import { AppTypography } from "../Typography/AppTypography";
 
-/**
- * NavLink - Navigation link component for headers.
- * Provides consistent styling for logo/brand links.
- */
-export const NavLink = styled(AppTypography)({
-  textDecoration: "none",
-  color: "inherit",
-  flexGrow: 1,
-  fontWeight: 600,
-});
+interface NavLinkProps {
+  to: string;
+  children: React.ReactNode;
+}
 
-NavLink.displayName = "NavLink";
+export function NavLink({ to, children }: NavLinkProps) {
+  return (
+    <AppNavLinkButton to={to} intent="ghost">
+      <AppTypography intent="headingSmall">
+        {children}
+      </AppTypography>
+    </AppNavLinkButton>
+  );
+}

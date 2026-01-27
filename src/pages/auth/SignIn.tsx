@@ -1,6 +1,5 @@
 import React from "react";
 import { AppStack } from "../../components/ui/layout";
-import Link from "@mui/material/Link";
 import AuthFormWrapper from "./AuthFormWrapper";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
@@ -8,6 +7,7 @@ import { AppTypography } from "../../components/ui/Typography/AppTypography";
 import { AppButton } from "../../components/ui/Button/AppButton";
 import { AppTextField } from "../../components/ui/TextField/AppTextField";
 import { AppDivider } from "../../components/ui/Divider/AppDivider";
+import { AppLink } from "../../components/ui/Link/AppLink";
 
 function SignIn() {
   return (
@@ -44,10 +44,7 @@ function SignIn() {
             Don’t have an account?{" "}
           </AppTypography>
 
-          {/* need */}
-          <Link href="/signup" underline="hover">
-            Create one
-          </Link>
+          <AppLink to="/signup">Create one</AppLink>
         </AppStack>
       </AppStack>
     </AuthFormWrapper>

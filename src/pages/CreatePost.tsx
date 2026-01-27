@@ -136,7 +136,6 @@ export default function CreatePost() {
                 <UploadPlaceholder>
                   {form.imagePreview && (
                     <ImagePreview
-                      component="img"
                       src={form.imagePreview}
                       alt="Preview"
                     />

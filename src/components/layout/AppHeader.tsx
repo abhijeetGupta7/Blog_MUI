@@ -2,14 +2,13 @@ import React, { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Drawer from "@mui/material/Drawer";
-import { AppStack } from "../ui/layout";
 import MenuIcon from "@mui/icons-material/Menu";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
-import { Link as RouterLink } from "react-router-dom";
+import { AppStack, AppBox } from "../ui/layout"; 
 import { AppTypography } from "../ui/Typography/AppTypography";
-import { AppButton } from "../ui/Button/AppButton";
 import { useAppTheme } from "../../theme/AppThemeContext";
+
 import {
   DrawerContent,
   DesktopMenu,
@@ -17,15 +16,16 @@ import {
   ThemeToggleButton,
   NavLink,
 } from "../ui/Navigation";
+
 import { DrawerNavButton } from "../ui/Navigation/DrawerNavButton";
+import { AppNavLinkButton } from "../ui/Link/AppNavLinkButton";
 
 function AppHeader() {
   const { mode, toggleThemeMode } = useAppTheme();
-
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
+    setMobileOpen((prev) => !prev);
   };
 
   const handleLinkClick = () => {
@@ -36,18 +36,16 @@ function AppHeader() {
     <DrawerContent>
       <AppStack gap="sm">
         <AppTypography intent="headingSmall">Menu</AppTypography>
-
-        {/* Mobile Links - Stacked Vertically */}
-        <DrawerNavButton component={RouterLink} to="/" intent="ghost" onClick={handleLinkClick}>
+        <DrawerNavButton to="/" intent="ghost" onClick={handleLinkClick}>
           Home
         </DrawerNavButton>
-        <DrawerNavButton component={RouterLink} to="/create-post" intent="ghost" onClick={handleLinkClick}>
+        <DrawerNavButton to="/create-post" intent="ghost" onClick={handleLinkClick}>
           Create
         </DrawerNavButton>
-        <DrawerNavButton component={RouterLink} to="/signin" intent="ghost" onClick={handleLinkClick}>
+        <DrawerNavButton to="/signin" intent="ghost" onClick={handleLinkClick}>
           Sign In
         </DrawerNavButton>
-        <DrawerNavButton component={RouterLink} to="/profile" intent="ghost" onClick={handleLinkClick}>
+        <DrawerNavButton to="/profile" intent="ghost" onClick={handleLinkClick}>
           Profile
         </DrawerNavButton>
       </AppStack>
@@ -57,50 +55,40 @@ function AppHeader() {
   return (
     <AppBar position="sticky" color="default" elevation={1}>
       <Toolbar>
-        {/* LOGO */}
-        <NavLink intent="headingSmall" component={RouterLink} to="/">
-          MyBlog
-        </NavLink>
+        
+        <NavLink to="/">MyBlog</NavLink>
 
-        {/* DESKTOP MENU */}
-        <DesktopMenu>
-          <AppButton component={RouterLink} to="/" intent="ghost">
-            Home
-          </AppButton>
-          <AppButton component={RouterLink} to="/create-post" intent="ghost">
-            Create
-          </AppButton>
-          <AppButton component={RouterLink} to="/signin" intent="ghost">
-            Sign In
-          </AppButton>
-          <AppButton component={RouterLink} to="/profile" intent="ghost">
-            Profile
-          </AppButton>
-        </DesktopMenu>
+        <AppBox flexGrow={1} />
 
-        {/* THEME TOGGLE */}
-        <ThemeToggleButton onClick={toggleThemeMode}>
-          {mode === "dark" ? <LightModeOutlinedIcon /> : <DarkModeOutlinedIcon />}
-        </ThemeToggleButton>
+        <AppStack direction="row" alignItems="center" gap="sm">
+          
+          <DesktopMenu>
+            <AppNavLinkButton to="/" intent="ghost">Home</AppNavLinkButton>
+            <AppNavLinkButton to="/create-post" intent="ghost">Create</AppNavLinkButton>
+            <AppNavLinkButton to="/signin" intent="ghost">Sign In</AppNavLinkButton>
+            <AppNavLinkButton to="/profile" intent="ghost">Profile</AppNavLinkButton>
+          </DesktopMenu>
 
-        {/* MOBILE MENU ICON */}
-        <MobileMenuIcon
-          color="inherit"
-          aria-label="open drawer"
-          edge="end"
-          onClick={handleDrawerToggle}
-        >
-          <MenuIcon />
-        </MobileMenuIcon>
+          <ThemeToggleButton onClick={toggleThemeMode}>
+            {mode === "dark" ? <LightModeOutlinedIcon /> : <DarkModeOutlinedIcon />}
+          </ThemeToggleButton>
 
-        {/* MOBILE DRAWER COMPONENT */}
+          <MobileMenuIcon
+            color="inherit"
+            aria-label="open drawer"
+            edge="end"
+            onClick={handleDrawerToggle}
+          >
+            <MenuIcon />
+          </MobileMenuIcon>
+          
+        </AppStack>
+
         <Drawer
           anchor="left"
           open={mobileOpen}
           onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true,
-          }}
+          ModalProps={{ keepMounted: true }}
         >
           {drawerContent}
         </Drawer>

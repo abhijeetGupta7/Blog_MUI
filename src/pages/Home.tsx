@@ -4,10 +4,9 @@ import AppCard from "../components/AppCard";
 const BlogCarousel = lazy(() => import("../components/BlogCarousel"));
 import PageLoader from "../components/PageLoader";
 import { BLOG_POSTS } from "../data/mockData";
-import { Link as RouterLink } from "react-router-dom";
-import { AppButton } from "../components/ui/Button/AppButton";
 import { AppStack, AppGrid } from "../components/ui/layout";
 import { SectionHeader, SectionTitle } from "../components/ui/Home";
+import { AppLink } from "../components/ui/Link/AppLink";
 
 export default function Home() {
   const cards = useMemo(
@@ -22,7 +21,7 @@ export default function Home() {
           />
         </AppGrid>
       )),
-    []
+    [],
   );
 
   return (
@@ -40,10 +39,7 @@ export default function Home() {
             </AppTypography>
           </SectionTitle>
 
-        
-          <AppButton component={RouterLink} to="/blogs" intent="text">
-            View all
-          </AppButton>
+          <AppLink to="/blogs">View all</AppLink>
         </SectionHeader>
 
         <AppGrid container spacing={4}>
