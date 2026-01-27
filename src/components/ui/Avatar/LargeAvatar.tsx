@@ -1,13 +1,22 @@
+import React from "react";
 import { styled } from "@mui/material/styles";
-import Avatar from "@mui/material/Avatar";
+import Avatar, {type AvatarProps } from "@mui/material/Avatar";
 
 /**
  * LargeAvatar - A reusable large avatar component.
- * Commonly used in profile pages, user cards, or comment sections.
+ * Accepts all `Avatar` props and ensures an accessible `alt` is provided.
  */
-export const LargeAvatar = styled(Avatar)({
+const Styled = styled(Avatar)({
   width: 96,
   height: 96,
 });
+
+export type LargeAvatarProps = AvatarProps & { alt?: string };
+
+export const LargeAvatar: React.FC<LargeAvatarProps> = ({ alt, ...props }) => {
+  // If no alt provided, default to a sensible label for screen readers.
+  const altText = alt ?? "User avatar";
+  return <Styled alt={altText} {...props} />;
+};
 
 LargeAvatar.displayName = "LargeAvatar";

@@ -69,10 +69,10 @@ export default function HeroCarousel() {
         <AppTypography intent="headingLarge">Featured Blogs</AppTypography>
 
         <CarouselNavigation>
-          <IconButton onClick={() => scroll("left")}>
+          <IconButton onClick={() => scroll("left")} aria-label="Scroll left">
             <ArrowBackIosNewIcon />
           </IconButton>
-          <IconButton onClick={() => scroll("right")}>
+          <IconButton onClick={() => scroll("right")} aria-label="Scroll right">
             <ArrowForwardIosIcon />
           </IconButton>
         </CarouselNavigation>

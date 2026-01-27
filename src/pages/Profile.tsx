@@ -52,6 +52,7 @@ export default function Profile() {
               <AppStack direction="row" gap="md" alignItems="center">
                 <LargeAvatar
                   src={avatarPreview ?? undefined}
+                  alt={username || MOCK_USER.username}
                 />
 
                 <AppButton
