@@ -18,20 +18,12 @@ import {
 } from "../components/ui/Page";
 import { UploadPlaceholder, ImagePreview } from "../components/ui/Form";
 
-// ----------------------------------------------------------------------
-// STYLED COMPONENTS
-// ----------------------------------------------------------------------
-
 const CreatePostCard = styled(PageCard)(({ theme }) => ({
   padding: theme.spacing(2.5),
   [theme.breakpoints.up("md")]: {
     padding: theme.spacing(4),
   },
 }));
-
-// ----------------------------------------------------------------------
-// CONSTANTS
-// ----------------------------------------------------------------------
 
 const TAG_OPTIONS = [
   "React",
@@ -49,10 +41,6 @@ const INITIAL_FORM = {
   tags: [] as string[],
   imagePreview: null as string | null,
 };
-
-// ----------------------------------------------------------------------
-// COMPONENT
-// ----------------------------------------------------------------------
 
 export default function CreatePost() {
   const navigate = useNavigate();

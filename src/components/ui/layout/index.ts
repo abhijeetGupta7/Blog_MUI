@@ -1,4 +1,5 @@
 export { AppBox } from "./AppBox";
+export { AppGrid } from "./AppGrid";
 export { AppContainer } from "./AppContainer";
 export { AppStack } from "./AppStack";
 export { AppPaper } from "./AppPaper";

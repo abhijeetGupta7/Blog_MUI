@@ -1,5 +1,4 @@
 import React, { useMemo, lazy } from "react";
-import Grid from "@mui/material/Grid";
 import { AppTypography } from "../components/ui/Typography/AppTypography";
 import AppCard from "../components/AppCard";
 const BlogCarousel = lazy(() => import("../components/BlogCarousel"));
@@ -7,21 +6,21 @@ import PageLoader from "../components/PageLoader";
 import { BLOG_POSTS } from "../data/mockData";
 import { Link as RouterLink } from "react-router-dom";
 import { AppButton } from "../components/ui/Button/AppButton";
-import { AppStack } from "../components/ui/layout";
+import { AppStack, AppGrid } from "../components/ui/layout";
 import { SectionHeader, SectionTitle } from "../components/ui/Home";
 
 export default function Home() {
   const cards = useMemo(
     () =>
       BLOG_POSTS.map((post) => (
-        <Grid key={post.id} size={{ xs: 12, sm: 6, md: 4 }}>
+        <AppGrid key={post.id} size={{ xs: 12, sm: 6, md: 4 }}>
           <AppCard
             title={post.title}
             description={post.description}
             image={post.image}
             href={`/blog/${post.id}`}
           />
-        </Grid>
+        </AppGrid>
       )),
     []
   );
@@ -47,9 +46,9 @@ export default function Home() {
           </AppButton>
         </SectionHeader>
 
-        <Grid container spacing={4}>
+        <AppGrid container spacing={4}>
           {cards}
-        </Grid>
+        </AppGrid>
       </AppStack>
     </>
   );

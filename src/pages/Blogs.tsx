@@ -1,6 +1,5 @@
 import { useMemo, useState } from "react";
-import { AppStack } from "../components/ui/layout";
-import Grid from "@mui/material/Grid";
+import { AppStack, AppGrid } from "../components/ui/layout";
 import { AppTypography } from "../components/ui/Typography/AppTypography";
 import MenuItem from "@mui/material/MenuItem";
 import Chip from "@mui/material/Chip";
@@ -44,14 +43,14 @@ export default function Blogs() {
   const postCards = useMemo(
     () =>
       filteredPosts.map((post) => (
-        <Grid key={post.id} size={{ xs: 12, sm: 6, md: 4 }}>
+        <AppGrid key={post.id} size={{ xs: 12, sm: 6, md: 4 }}>
           <AppCard
             title={post.title}
             description={post.description}
             image={post.image}
             href={`/blog/${post.id}`}
           />
-        </Grid>
+        </AppGrid>
       )),
     [filteredPosts]
   );
@@ -108,9 +107,9 @@ export default function Blogs() {
       <Divider />
 
       {/* BLOG GRID */}
-      <Grid container spacing={4}>
+      <AppGrid container spacing={4}>
         {postCards}
-      </Grid>
+      </AppGrid>
 
       {/* EMPTY STATE */}
       {filteredPosts.length === 0 && (

@@ -1,7 +1,7 @@
 import { AppContainer } from "../../components/ui/layout";
 import { AppTypography } from "../../components/ui/Typography/AppTypography";
 import { Outlet } from "react-router-dom";
-import Grid from "@mui/material/Grid";
+import { AppGrid } from "../../components/ui/layout";
 import {
   AuthLayoutRoot,
   AuthSidePanel,
@@ -12,7 +12,7 @@ import {
 export default function AuthLayout() {
   return (
     <AuthLayoutRoot>
-      <Grid container minHeight="100vh">
+      <AppGrid container minHeight="100vh">
         {/* LEFT SIDE – IMAGE */}
         <AuthSidePanel size={{ xs: 0, md: 6 }}>
           <AuthSideContent>
@@ -31,7 +31,7 @@ export default function AuthLayout() {
             <Outlet />
           </AppContainer>
         </AuthFormPanel>
-      </Grid>
+      </AppGrid>
     </AuthLayoutRoot>
   );
 }
