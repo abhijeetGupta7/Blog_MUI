@@ -1,17 +1,7 @@
 import { styled } from "@mui/material/styles";
 import Container, { type ContainerProps } from "@mui/material/Container";
 
-// ----------------------------------------------------------------------
-// 1. TYPES
-// ----------------------------------------------------------------------
-
-
-// ----------------------------------------------------------------------
-// 2. THE COMPONENT
-// ----------------------------------------------------------------------
-
 export const AppContainer = styled(Container)<ContainerProps>(({ theme }) => ({
-  // 1. Consistent Responsive Gutters
   paddingLeft: theme.spacing(2),
   paddingRight: theme.spacing(2),
 

@@ -3,11 +3,15 @@ import PageLoader from "../components/PageLoader";
 import { Routes, Route, Navigate } from "react-router-dom";
 
 // Lazy-loaded pages
+
+// AUth
+const AuthLayout = lazy(() => import("./layout/AuthLayout"));
 const SignIn = lazy(() => import("../pages/auth/SignIn"));
 const SignUp = lazy(() => import("../pages/auth/SignUp"));
+
+// Cover
 const Home = lazy(() => import("../pages/Home"));
 const CreatePost = lazy(() => import("../pages/CreatePost"));
-const AuthLayout = lazy(() => import("./layout/AuthLayout"));
 const AppLayout = lazy(() => import("./layout/AppLayout"));
 const BlogDetail = lazy(() => import("../components/BlogDetail"));
 const Profile = lazy(() => import("../pages/Profile"));
