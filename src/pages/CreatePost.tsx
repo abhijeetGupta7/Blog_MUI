@@ -11,11 +11,15 @@ import PhotoCameraOutlinedIcon from "@mui/icons-material/PhotoCameraOutlined";
 import { useNavigate } from "react-router-dom";
 import { AppButton } from "../components/ui/Button/AppButton";
 import { AppTextField } from "../components/ui/TextField/AppTextField";
-import { PageCenteringWrapper, PageCard, SectionDivider } from "../components/ui/Page";
+import {
+  PageCenteringWrapper,
+  PageCard,
+  SectionDivider,
+} from "../components/ui/Page";
 import { UploadPlaceholder, ImagePreview } from "../components/ui/Form";
 
 // ----------------------------------------------------------------------
-// STYLED COMPONENTS (Page-specific overrides)
+// STYLED COMPONENTS
 // ----------------------------------------------------------------------
 
 const CreatePostCard = styled(PageCard)(({ theme }) => ({
@@ -39,6 +43,13 @@ const TAG_OPTIONS = [
   "Performance",
 ];
 
+const INITIAL_FORM = {
+  title: "",
+  description: "",
+  tags: [] as string[],
+  imagePreview: null as string | null,
+};
+
 // ----------------------------------------------------------------------
 // COMPONENT
 // ----------------------------------------------------------------------
@@ -46,11 +57,9 @@ const TAG_OPTIONS = [
 export default function CreatePost() {
   const navigate = useNavigate();
 
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [tags, setTags] = useState<string[]>([]);
-  const [imagePreview, setImagePreview] = useState<string | null>(null);
-  const [openSnack, setOpenSnack] = useState(false);
+  // Bundled form state
+  const [form, setForm] = useState(INITIAL_FORM);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
 
   const tagOptions = useMemo(() => TAG_OPTIONS, []);
 
@@ -60,17 +69,15 @@ export default function CreatePost() {
       if (!file) return;
 
       const reader = new FileReader();
-      reader.onload = () => setImagePreview(String(reader.result));
+      reader.onload = () =>
+        setForm((prev) => ({ ...prev, imagePreview: String(reader.result) }));
       reader.readAsDataURL(file);
     },
     []
   );
 
   const resetForm = useCallback(() => {
-    setTitle("");
-    setDescription("");
-    setTags([]);
-    setImagePreview(null);
+    setForm(INITIAL_FORM);
   }, []);
 
   const handleSubmit = useCallback(
@@ -79,10 +86,10 @@ export default function CreatePost() {
 
       const createdPost = {
         id: Date.now(),
-        title: title.trim(),
-        description: description.trim(),
-        tags,
-        image: imagePreview,
+        title: form.title.trim(),
+        description: form.description.trim(),
+        tags: form.tags,
+        image: form.imagePreview,
         createdAt: new Date().toISOString(),
       };
 
@@ -93,28 +100,27 @@ export default function CreatePost() {
         JSON.stringify([createdPost, ...existing])
       );
 
-      setOpenSnack(true);
+      setSnackbarOpen(true);
 
       setTimeout(() => {
         resetForm();
         navigate("/");
       }, 800);
     },
-    [title, description, tags, imagePreview, navigate, resetForm]
+    [form, navigate, resetForm]
   );
 
   return (
     <>
       <PageCenteringWrapper>
         <CreatePostCard intent="base" elevation={2} maxWidth={900}>
-          {/* Header */}
           <AppTypography intent="headingMedium">Create New Post</AppTypography>
-
-          <AppTypography intent="bodySecondary">Share your thoughts with the community</AppTypography>
+          <AppTypography intent="bodySecondary">
+            Share your thoughts with the community
+          </AppTypography>
 
           <SectionDivider />
 
-          {/* Form */}
           <AppBox component="form" onSubmit={handleSubmit}>
             <AppStack gap="md">
               {/* Image Upload */}
@@ -122,10 +128,10 @@ export default function CreatePost() {
                 <AppTypography intent="headingSmall">Cover image</AppTypography>
 
                 <UploadPlaceholder>
-                  {imagePreview && (
+                  {form.imagePreview && (
                     <ImagePreview
                       component="img"
-                      src={imagePreview}
+                      src={form.imagePreview}
                       alt="Preview"
                     />
                   )}
@@ -136,7 +142,12 @@ export default function CreatePost() {
                     startIcon={<PhotoCameraOutlinedIcon />}
                   >
                     Upload image
-                    <input hidden type="file" accept="image/*" onChange={handleImageChange} />
+                    <input
+                      hidden
+                      type="file"
+                      accept="image/*"
+                      onChange={handleImageChange}
+                    />
                   </AppButton>
                 </UploadPlaceholder>
               </AppStack>
@@ -144,8 +155,10 @@ export default function CreatePost() {
               {/* Title */}
               <AppTextField
                 label="Title"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
+                value={form.title}
+                onChange={(e) =>
+                  setForm((prev) => ({ ...prev, title: e.target.value }))
+                }
                 required
               />
 
@@ -153,8 +166,10 @@ export default function CreatePost() {
               <Autocomplete
                 multiple
                 options={tagOptions}
-                value={tags}
-                onChange={(_, val) => setTags(val)}
+                value={form.tags}
+                onChange={(_, val) =>
+                  setForm((prev) => ({ ...prev, tags: val }))
+                }
                 renderTags={(value, getTagProps) =>
                   value.map((option, index) => (
                     <Chip
@@ -176,33 +191,30 @@ export default function CreatePost() {
               {/* Description */}
               <AppTextField
                 label="Description"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
+                value={form.description}
+                onChange={(e) =>
+                  setForm((prev) => ({ ...prev, description: e.target.value }))
+                }
                 multiline
                 minRows={6}
               />
 
               {/* Actions */}
               <AppStack direction="row" gap="sm" justifyContent="flex-end">
-            
                 <AppButton intent="text" onClick={resetForm}>
                   Reset
                 </AppButton>
-                
-                <AppButton type="submit">
-                  Publish
-                </AppButton>
+                <AppButton type="submit">Publish</AppButton>
               </AppStack>
             </AppStack>
           </AppBox>
         </CreatePostCard>
       </PageCenteringWrapper>
 
-      {/* Feedback */}
       <Snackbar
-        open={openSnack}
+        open={snackbarOpen}
         autoHideDuration={1200}
-        onClose={() => setOpenSnack(false)}
+        onClose={() => setSnackbarOpen(false)}
       >
         <Alert severity="success" variant="filled">
           Post created successfully
