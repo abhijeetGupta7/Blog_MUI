@@ -11,6 +11,8 @@ import { SelectWrapper } from "../components/ui/Form";
 
 import AppCard from "../components/AppCard";
 import { BLOG_POSTS } from "../data/mockData";
+import { useDebounce } from "../hooks/useDebounce";
+import { DEBOUNCE_SEARCH_DELAY } from "../constants/common";
 
 const TAGS = ["React", "MUI", "Design", "Performance", "Tutorial"] as const;
 type SortOption = "latest" | "oldest";
@@ -34,30 +36,34 @@ export default function Blogs() {
     setFilters((prev) => ({ ...prev, ...patch }));
   };
 
+  const debouncedSearch = useDebounce(filters.search, DEBOUNCE_SEARCH_DELAY);
+
   const filteredPosts = useMemo(() => {
-    if (!Array.isArray(BLOG_POSTS)) return [];
-
     let posts = BLOG_POSTS;
-
-    if (filters.search.trim()) {
-      const query = filters.search.toLowerCase();
+  
+    if (debouncedSearch.trim()) {
+      const query = debouncedSearch.toLowerCase();
       posts = posts.filter((p) =>
         p.title.toLowerCase().includes(query)
       );
     }
-
+  
     if (filters.tag) {
-      const tag = filters.tag.toLowerCase();
-      posts = posts.filter((p) =>
-        p.title.toLowerCase().includes(tag)
-      );
+        const tag = filters.tag.toLowerCase();
+        posts = posts.filter((p) =>
+          p.title.toLowerCase().includes(tag)
+        );
     }
-
+  
     return [...posts].sort((a, b) =>
       filters.sort === "latest" ? b.id - a.id : a.id - b.id
     );
-  }, [filters]);
-
+  }, [
+    debouncedSearch,
+    filters.tag,    
+    filters.sort,    
+  ]);
+  
   return (
     <AppStack gap="lg">
       {/* HEADER */}
