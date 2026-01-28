@@ -37,6 +37,7 @@ export default function Home() {
             <AppTypography intent="headingLarge">Recent Blogs</AppTypography>
             <AppTypography intent="bodySecondary">
               Latest thoughts from the community
+
             </AppTypography>
           </SectionTitle>
 

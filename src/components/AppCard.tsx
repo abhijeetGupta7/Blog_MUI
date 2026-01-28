@@ -28,7 +28,8 @@ function AppCard({ title, description, image, href }: AppCardProps) {
               component="img" 
               image={image} 
               alt={title} 
-              loading="lazy" 
+              loading="eager"
+              fetchPriority="high" 
               height="100%"
             />
           )}

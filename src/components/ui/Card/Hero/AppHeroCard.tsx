@@ -21,7 +21,8 @@ export const AppHeroCard = forwardRef<HTMLDivElement, AppHeroCardProps>(
         <AppCardAction component={RouterLink} to={href}>
           {/* IMAGE LAYER */}
           <AppCardMediaContainer height="100%">
-            {image && <HeroImage
+            {image && 
+              <HeroImage
               image={image}
               active={!!active}
             /> }
