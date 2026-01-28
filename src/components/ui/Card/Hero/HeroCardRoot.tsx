@@ -3,7 +3,7 @@ import AppCardRoot from "../AppCardRoot";
 
 export const HeroCardRoot = styled(AppCardRoot, {
   shouldForwardProp: (prop) => prop !== "active",
-})<{ active: boolean }>(({ theme, active }) => ({
+})<{ active?: boolean }>(({ theme, active }) => ({
   minWidth: 300,
   height: 520,
   flexShrink: 0,
