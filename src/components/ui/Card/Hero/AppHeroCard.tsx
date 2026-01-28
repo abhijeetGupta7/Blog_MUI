@@ -25,6 +25,7 @@ export const AppHeroCard = forwardRef<HTMLDivElement, AppHeroCardProps>(
               <HeroImage
               image={image}
               active={!!active}
+              component="img"
             /> }
             <HeroOverlay />
           </AppCardMediaContainer>
