@@ -1,15 +1,14 @@
 import { useMemo, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
-import MenuItem from "@mui/material/MenuItem";
 
 import { AppStack, AppGrid } from "../components/ui/layout";
 import { AppTypography } from "../components/ui/Typography/AppTypography";
 import { AppTextField } from "../components/ui/TextField/AppTextField";
 import { AppDivider } from "../components/ui/Divider/AppDivider";
 import { AppChip } from "../components/ui/Chip/AppChip";
-import { SelectWrapper } from "../components/ui/Form";
-
+import { AppMenuItem, SelectWrapper } from "../components/ui/Form";
 import AppCard from "../components/AppCard";
+
 import { BLOG_POSTS } from "../data/mockData";
 import { useDebounce } from "../hooks/useDebounce";
 import { DEBOUNCE_SEARCH_DELAY } from "../constants/common";
@@ -92,8 +91,8 @@ export default function Blogs() {
             updateFilters({ sort: e.target.value as SortOption })
           }
         >
-          <MenuItem value="latest">Latest</MenuItem>
-          <MenuItem value="oldest">Oldest</MenuItem>
+          <AppMenuItem value="latest">Latest</AppMenuItem>
+          <AppMenuItem value="oldest">Oldest</AppMenuItem>
         </SelectWrapper>
       </AppStack>
 

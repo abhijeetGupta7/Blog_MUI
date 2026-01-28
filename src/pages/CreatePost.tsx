@@ -1,10 +1,7 @@
 import { useCallback, useMemo, useState } from "react";
 import Autocomplete from "@mui/material/Autocomplete";
-import Snackbar from "@mui/material/Snackbar";
-import Alert from "@mui/material/Alert";
 import PhotoCameraOutlinedIcon from "@mui/icons-material/PhotoCameraOutlined";
 import { useNavigate } from "react-router-dom";
-
 import { AppBox } from "../components/ui/layout/AppBox";
 import { AppStack } from "../components/ui/layout/AppStack";
 import { AppTypography } from "../components/ui/Typography/AppTypography";
@@ -12,12 +9,13 @@ import { AppButton } from "../components/ui/Button/AppButton";
 import { AppTextField } from "../components/ui/TextField/AppTextField";
 import {
   PageCenteringWrapper,
-  CreatePostCard,
   SectionDivider,
+  PageCard,
 } from "../components/ui/Page";
 import { UploadPlaceholder, ImagePreview } from "../components/ui/Form";
 import { AppChip } from "../components/ui/Chip/AppChip";
 import { VisuallyHiddenInput } from "../components/ui/Form/VisuallyHiddenInput";
+import { AppAlert, AppSnackbar } from "../components/ui/Feedback";
 
 const TAG_OPTIONS = [
   "React",
@@ -114,7 +112,7 @@ export default function CreatePost() {
   return (
     <>
       <PageCenteringWrapper>
-        <CreatePostCard intent="base" elevation={2} maxWidth={900}>
+        <PageCard intent="base" elevation={2} maxWidth={900}>
           <AppTypography intent="headingMedium">Create New Post</AppTypography>
           <AppTypography intent="bodySecondary">
             Share your thoughts with the community
@@ -197,18 +195,18 @@ export default function CreatePost() {
               </AppStack>
             </AppStack>
           </AppBox>
-        </CreatePostCard>
+        </PageCard>
       </PageCenteringWrapper>
 
-      <Snackbar
+      <AppSnackbar
         open={snackbarOpen}
         autoHideDuration={1200}
         onClose={() => setSnackbarOpen(false)}
       >
-        <Alert severity="success" variant="filled">
+        <AppAlert severity="success" variant="filled">
           Post created successfully
-        </Alert>
-      </Snackbar>
+        </AppAlert>
+      </AppSnackbar>
     </>
   );
 }

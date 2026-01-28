@@ -1,11 +1,11 @@
 import React, { useMemo, lazy } from "react";
 import { AppTypography } from "../components/ui/Typography/AppTypography";
 import AppCard from "../components/AppCard";
-import PageLoader from "../components/PageLoader";
 import { BLOG_POSTS } from "../data/mockData";
 import { AppStack, AppGrid } from "../components/ui/layout";
-import { SectionHeader, SectionTitle } from "../components/ui/Home";
+import { SectionHeader, SectionTitle } from "../components/ui/Section";
 import { AppLink } from "../components/ui/Link/AppLink";
+import { PageLoader } from "../components/ui/Loading";
 
 const BlogCarousel = lazy(() => import("../components/BlogCarousel"));
 

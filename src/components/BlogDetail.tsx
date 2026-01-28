@@ -1,7 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { AppTypography } from "./ui/Typography/AppTypography";
-import { AppContainer } from "./ui/layout";
-import Chip from "@mui/material/Chip";
 import { AppStack } from "./ui/layout";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { BLOG_POSTS } from "../data/mockData";
@@ -10,13 +8,9 @@ import {
   NotFoundContainer,
   BlogImage,
   BackButtonWrapper,
+  BlogDetailContainer,
 } from "./ui/Blog";
-import { styled } from "@mui/material/styles";
-
-const BlogDetailContainer = styled(AppContainer)(({ theme }) => ({
-  paddingTop: theme.spacing(4),
-  paddingBottom: theme.spacing(4),
-}));
+import { AppChip } from "./ui/Chip/AppChip";
 
 export default function BlogDetail() {
   const { id } = useParams();
@@ -65,8 +59,8 @@ export default function BlogDetail() {
       </AppTypography>
 
       <AppStack direction="row" gap="xs">
-        <Chip label="React" size="small" />
-        <Chip label="Tech" size="small" />
+        <AppChip label="React" size="small" />
+        <AppChip label="Tech" size="small" />
         <AppTypography intent="caption">5 min read</AppTypography>
       </AppStack>
 

@@ -1,7 +1,7 @@
 import CircularProgress from "@mui/material/CircularProgress";
-import { CenteredLoader } from "./ui/Loading";
+import { CenteredLoader } from ".";
 
-const PageLoader = () => {
+export const PageLoader = () => {
   return (
     <CenteredLoader>
       <CircularProgress />
@@ -9,4 +9,3 @@ const PageLoader = () => {
   );
 };
 
-export default PageLoader;

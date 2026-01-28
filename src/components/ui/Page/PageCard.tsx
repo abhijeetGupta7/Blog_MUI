@@ -14,16 +14,11 @@ export const PageCard = styled(AppPaper, {
 })<PageCardProps>(({ theme, maxWidth = 720 }) => ({
   width: "100%",
   maxWidth: typeof maxWidth === "number" ? theme.spacing(maxWidth) : maxWidth,
-  padding: theme.spacing(4),
-}));
-
-PageCard.displayName = "PageCard";
-
-export const CreatePostCard = styled(PageCard)(({ theme }) => ({
   padding: theme.spacing(2.5),
   [theme.breakpoints.up("md")]: {
     padding: theme.spacing(4),
   },
 }));
 
-CreatePostCard.displayName = "CreatePostCard";
+PageCard.displayName = "PageCard";
+

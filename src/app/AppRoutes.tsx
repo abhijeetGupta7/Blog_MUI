@@ -1,6 +1,6 @@
 import { Suspense, lazy } from "react";
-import PageLoader from "../components/PageLoader";
 import { Routes, Route, Navigate } from "react-router-dom";
+import { PageLoader } from "../components/ui/Loading";
 
 // Lazy-loaded pages
 

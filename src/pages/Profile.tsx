@@ -1,11 +1,6 @@
 import { useState, useCallback } from "react";
 import { AppBox, AppStack } from "../components/ui/layout";
 import { AppTypography } from "../components/ui/Typography/AppTypography";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Switch from "@mui/material/Switch";
-import Snackbar from "@mui/material/Snackbar";
-import Alert from "@mui/material/Alert";
-import PhotoCameraOutlinedIcon from "@mui/icons-material/PhotoCameraOutlined";
 import { MOCK_USER } from "../data/mockUser";
 import { AppButton } from "../components/ui/Button/AppButton";
 import { AppTextField } from "../components/ui/TextField/AppTextField";
@@ -15,6 +10,10 @@ import {
   SectionDivider,
 } from "../components/ui/Page";
 import { LargeAvatar } from "../components/ui/Avatar";
+import { AppFormControlLabel, AppSwitch } from "../components/ui/Form/";
+import { AppAlert, AppSnackbar } from "../components/ui/Feedback";
+
+import PhotoCameraOutlinedIcon from "@mui/icons-material/PhotoCameraOutlined";
 
 type ProfileForm = {
   username: string;
@@ -117,9 +116,9 @@ export default function Profile() {
                 }
               />
 
-              <FormControlLabel
+              <AppFormControlLabel
                 control={
-                  <Switch
+                  <AppSwitch
                     checked={form.changePassword}
                     onChange={() =>
                       updateForm({
@@ -155,15 +154,15 @@ export default function Profile() {
         </PageCard>
       </PageCenteringWrapper>
 
-      <Snackbar
+      <AppSnackbar
         open={openSnack}
         autoHideDuration={1200}
         onClose={() => setOpenSnack(false)}
       >
-        <Alert severity="success" variant="filled">
+        <AppAlert severity="success" variant="filled">
           Profile updated successfully
-        </Alert>
-      </Snackbar>
+        </AppAlert>
+      </AppSnackbar>
     </>
   );
 }

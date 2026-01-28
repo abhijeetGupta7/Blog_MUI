@@ -1,5 +1,5 @@
 import { styled } from "@mui/material/styles";
-import { AppBox } from "../layout/AppBox";
+import { AppBox } from "../../layout";
 
 /**
  * HeroTopContent - Container for top content in hero cards.

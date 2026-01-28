@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import { BLOG_POSTS } from "../data/mockData";
 import { AppStack } from "./ui/layout";
-import { AppHeroCard } from "./ui/Card/AppHeroCard";
+import { AppHeroCard } from "./ui/Card/Hero/AppHeroCard";
 import { AppTypography } from "./ui/Typography/AppTypography";
 import {
   CarouselHeader,
@@ -9,8 +9,9 @@ import {
 } from "./ui/Carousel";
 import { AppChip } from "./ui/Chip/AppChip";
 import { useAutoScroll } from "../hooks/useAutoScroll";
+import type { BlogPost } from "../types/Blog";
 
-function HeroCard({ item }: { item: typeof BLOG_POSTS[0] }) {
+function HeroCard({ item }: { item: BlogPost }) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = React.useState(false);
 
