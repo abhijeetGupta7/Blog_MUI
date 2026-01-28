@@ -38,6 +38,7 @@ export default function Blogs() {
 
   const debouncedSearch = useDebounce(filters.search, DEBOUNCE_SEARCH_DELAY);
 
+  // When backend is applied, this usememo will be replaced by useEffect (custom hook)
   const filteredPosts = useMemo(() => {
     let posts = BLOG_POSTS;
   

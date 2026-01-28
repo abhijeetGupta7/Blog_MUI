@@ -4,7 +4,6 @@ import { AppCardRoot } from "./ui/Card/AppCardRoot";
 import { AppTypography } from "./ui/Typography/AppTypography";
 import { CarouselTrack } from "./ui/Carousel";
 
-// 1. The Card Root (Extends your system Card)
 export const HeroCardRoot = styled(AppCardRoot, {
   shouldForwardProp: (prop) => prop !== "active",
 })<{ active: boolean }>(({ theme, active }) => ({
@@ -27,7 +26,6 @@ export const HeroCardRoot = styled(AppCardRoot, {
   },
 }));
 
-// 2. The Gradient Overlay
 export const HeroOverlay = styled("div")({
   position: "absolute",
   inset: 0,
@@ -35,7 +33,6 @@ export const HeroOverlay = styled("div")({
   pointerEvents: "none",
 });
 
-// 3. The Content Wrapper (Absolute positioned)
 export const HeroContent = styled(CardContent)<{ active: boolean }>(
   ({ theme, active }) => ({
     position: "absolute",
@@ -53,7 +50,6 @@ export const HeroContent = styled(CardContent)<{ active: boolean }>(
   })
 );
 
-// 4. The Description (Collapsible)
 export const HeroDescription = styled(AppTypography)<{ active: boolean }>(
   ({ theme, active }) => ({
     color: "rgba(255,255,255,0.85)",
@@ -70,5 +66,4 @@ export const HeroDescription = styled(AppTypography)<{ active: boolean }>(
   })
 );
 
-// 5. The Carousel Track (Hide Scrollbar) - Now using reusable component
 export { CarouselTrack };

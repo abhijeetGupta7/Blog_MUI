@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect } from "react";
 import { BLOG_POSTS } from "../data/mockData";
 import { AppStack } from "./ui/layout";
 import { AppHeroCard } from "./ui/Card/AppHeroCard";
@@ -8,10 +8,11 @@ import {
   CarouselTrack,
 } from "./ui/Carousel";
 import { AppChip } from "./ui/Chip/AppChip";
+import { useAutoScroll } from "../hooks/useAutoScroll";
 
 function HeroCard({ item }: { item: typeof BLOG_POSTS[0] }) {
   const cardRef = useRef<HTMLDivElement>(null);
-  const [active, setActive] = useState(false);
+  const [active, setActive] = React.useState(false);
 
   useEffect(() => {
     if (!cardRef.current) return;
@@ -44,21 +45,26 @@ function HeroCard({ item }: { item: typeof BLOG_POSTS[0] }) {
 
 const MemoHeroCard = React.memo(HeroCard);
 
-export default function HeroCarousel() {
+export default function BlogCarousel() {
   const scrollRef = useRef<HTMLDivElement>(null);
+
+  useAutoScroll(scrollRef, { 
+    speed: 0.8,      
+    resumeDelay: 2000
+  });
 
   return (
     <AppStack gap="xs">
-      {/* HEADER */}
       <CarouselHeader
         direction="row"
         justifyContent="space-between"
         alignItems="center"
       >
-        <AppTypography intent="headingLarge">Featured Blogs</AppTypography>
+        <AppTypography intent="headingLarge">
+          Featured Blogs
+        </AppTypography>
       </CarouselHeader>
 
-      {/* TRACK */}
       <CarouselTrack ref={scrollRef}>
         {BLOG_POSTS.map((item) => (
           <MemoHeroCard key={item.id} item={item} />
