@@ -4,6 +4,7 @@ import type { CardMediaProps } from "@mui/material";
 
 interface HeroImageProps extends CardMediaProps {
     active?:boolean,
+    alt?:string
 }
 
 export const HeroImage = styled(AppCardMedia, {
